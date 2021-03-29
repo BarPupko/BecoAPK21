@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.becoapk21">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BecoAPK21">
+        <activity android:name=".users"></activity>
+        <activity android:name=".staticEquipment" />
+        <activity
+            android:name=".usersMan"
+            android:label="@string/title_activity_users_man"
+            android:theme="@style/Theme.BecoAPK21.NoActionBar" />
+        <activity android:name=".payment" />
+        <activity android:name=".help" />
+        <activity android:name=".checkElectric" />
+        <activity android:name=".checkSupplies" />
+        <activity android:name=".managaerCONTROL" />
+        <activity android:name=".nevePaz" />
+        <activity android:name=".wadiNisnas" />
+        <activity android:name=".batGalim" />
+        <activity android:name=".carmelRoad" />
+        <activity android:name=".puncher" />
+        <activity android:name=".Problems.puncher" />
+        <activity android:name=".whatsTheProblem" />
+        <activity android:name=".ManagerSession" />
+        <activity android:name=".tools" />
+        <activity android:name=".RoadMap" />
+        <activity android:name=".Parking" />
+        <activity android:name=".register" />
+        <activity android:name=".welcomeSession" />
+        <activity android:name=".Login" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

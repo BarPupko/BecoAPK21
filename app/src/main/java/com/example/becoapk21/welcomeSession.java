@@ -39,7 +39,7 @@ public class welcomeSession<first_name> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
         getWindow().setStatusBarColor(ContextCompat.getColor(welcomeSession.this, R.color.design_default_color_background));
-        //
+        //ghfh
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_session);
         getSupportActionBar().hide();

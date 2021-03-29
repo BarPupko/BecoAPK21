@@ -30,13 +30,6 @@ public class managaerCONTROL extends AppCompatActivity {
         tools = (ImageView) findViewById(R.id.allTools);
         userManagement = (ImageView) findViewById(R.id.userManagement);
         seeMessage = false;//set seeMessage to false (there is message inside)
-        tools.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplication(), checkSupplies.class);
-                startActivity(i);
-            }
-        });
 
 
         //when I click on the button "bell" , its open the dialog class I choose , and (messageDialog.class) I see the message.

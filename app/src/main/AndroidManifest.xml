@@ -12,23 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BecoAPK21">
         <activity android:name=".users"></activity>
-        <activity android:name=".staticEquipment" />
         <activity
             android:name=".usersMan"
             android:label="@string/title_activity_users_man"
             android:theme="@style/Theme.BecoAPK21.NoActionBar" />
         <activity android:name=".payment" />
         <activity android:name=".help" />
-        <activity android:name=".checkElectric" />
-        <activity android:name=".checkSupplies" />
         <activity android:name=".managaerCONTROL" />
         <activity android:name=".nevePaz" />
         <activity android:name=".wadiNisnas" />
         <activity android:name=".batGalim" />
         <activity android:name=".carmelRoad" />
-        <activity android:name=".puncher" />
         <activity android:name=".Problems.puncher" />
-        <activity android:name=".whatsTheProblem" />
         <activity android:name=".ManagerSession" />
         <activity android:name=".tools" />
         <activity android:name=".RoadMap" />

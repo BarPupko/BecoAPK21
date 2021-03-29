@@ -65,14 +65,7 @@ public class welcomeSession<first_name> extends AppCompatActivity {
 
 
         });
-        fix.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplication(), whatsTheProblem.class);
-                startActivity(i);
 
-            }
-        });
         chatSu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,27 +11,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BecoAPK21">
-        <activity android:name=".users"></activity>
+        <activity android:name=".Admin.users"></activity>
         <activity
-            android:name=".usersMan"
+            android:name=".Admin.usersMan"
             android:label="@string/title_activity_users_man"
             android:theme="@style/Theme.BecoAPK21.NoActionBar" />
-        <activity android:name=".payment" />
-        <activity android:name=".help" />
-        <activity android:name=".managaerCONTROL" />
-        <activity android:name=".nevePaz" />
-        <activity android:name=".wadiNisnas" />
-        <activity android:name=".batGalim" />
-        <activity android:name=".carmelRoad" />
+        <activity android:name=".Admin.payment" />
+        <activity android:name=".Admin.help" />
+        <activity android:name=".Admin.managaerCONTROL" />
+        <activity android:name=".Navigation.nevePaz" />
+        <activity android:name=".Navigation.wadiNisnas" />
+        <activity android:name=".Navigation.batGalim" />
+        <activity android:name=".Navigation.carmelRoad" />
         <activity android:name=".Problems.puncher" />
-        <activity android:name=".ManagerSession" />
-        <activity android:name=".tools" />
-        <activity android:name=".RoadMap" />
-        <activity android:name=".Parking" />
-        <activity android:name=".register" />
-        <activity android:name=".welcomeSession" />
-        <activity android:name=".Login" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.ManagerSession" />
+        <activity android:name=".Navigation.RoadMap" />
+        <activity android:name=".Parking.Parking" />
+        <activity android:name=".Login_Register.register" />
+        <activity android:name=".Activities.welcomeSession" />
+        <activity android:name=".Login_Register.Login" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".welcomeSession">
+    tools:context=".Activities.welcomeSession">
 
 
     <ImageView
@@ -116,18 +116,6 @@
         app:srcCompat="@drawable/chat" />
 
 
-    <ImageView
-        android:id="@+id/laundry"
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="276dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/parking"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/laundry" />
-
-
     <TextView
         android:id="@+id/textView5"
         android:layout_width="50dp"
@@ -161,7 +149,7 @@
         android:text="שירותי כביסה"
         android:textColor="#fff"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/laundry" />
+        tools:layout_editor_absoluteY="341dp" />
 
     <ImageView
         android:id="@+id/imageView5"
@@ -170,9 +158,6 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="276dp"
-        android:layout_marginEnd="30dp"
-        app:layout_constraintEnd_toStartOf="@+id/laundry"
-        app:layout_constraintHorizontal_bias="0.992"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/settings" />

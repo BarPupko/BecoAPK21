@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".managaerCONTROL">
+    tools:context=".Admin.managaerCONTROL">
 
     <ImageView
         android:id="@+id/imageView24"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.119"
-        app:srcCompat="@drawable/a" />
+        app:srcCompat="@drawable/admin_user_background" />
 
     <ImageView
         android:id="@+id/bell"
@@ -60,20 +60,6 @@
         app:layout_constraintVertical_bias="0.15" />
 
     <TextView
-        android:id="@+id/textView10"
-        android:layout_width="73dp"
-        android:layout_height="24dp"
-        android:text="מעקב ציוד"
-        android:textColor="#fff"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.784"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.282" />
-
-    <TextView
         android:id="@+id/textView12"
         android:layout_width="125dp"
         android:layout_height="24dp"
@@ -85,18 +71,6 @@
         app:layout_constraintHorizontal_bias="0.202"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userManagement" />
-
-    <ImageView
-        android:id="@+id/allTools"
-        android:layout_width="70dp"
-        android:layout_height="53dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.785"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.216"
-        app:srcCompat="@drawable/drill" />
 
     <ImageView
         android:id="@+id/userManagement"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".payment">
+    tools:context=".Admin.payment">
 
     <ImageView
         android:id="@+id/background"
@@ -14,18 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/userbackground"
         tools:layout_editor_absoluteY="-79dp" />
-
-    <ImageView
-        android:id="@+id/visa"
-        android:layout_width="272dp"
-        android:layout_height="164dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.067"
-        app:srcCompat="@drawable/visa" />
 
     <TextView
         android:id="@+id/textView18"
@@ -42,18 +30,6 @@
         app:layout_constraintVertical_bias="0.055" />
 
     <ImageView
-        android:id="@+id/Bit"
-        android:layout_width="198dp"
-        android:layout_height="180dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31"
-        app:srcCompat="@drawable/unnamed" />
-
-    <ImageView
         android:id="@+id/paypal"
         android:layout_width="161dp"
         android:layout_height="126dp"
@@ -61,6 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58"
+        app:layout_constraintVertical_bias="0.375"
         app:srcCompat="@drawable/paypal" />
 </androidx.constraintlayout.widget.ConstraintLayout>

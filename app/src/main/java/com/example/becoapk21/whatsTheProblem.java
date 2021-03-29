@@ -17,6 +17,7 @@ public class whatsTheProblem extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
+        //test
         getWindow().setStatusBarColor(ContextCompat.getColor(whatsTheProblem.this, R.color.design_default_color_background));
         //
         super.onCreate(savedInstanceState);

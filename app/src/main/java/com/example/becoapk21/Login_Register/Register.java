@@ -26,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,8 +43,10 @@ public class Register extends AppCompatActivity {
     FirebaseAuth fAuth;
     FirebaseDatabase rootNode;
     FirebaseFirestore fStore;
+    boolean isPhoneExists;
     boolean phoneExists = false;
-
+    boolean email_exists;
+    boolean phone_exists;
     Button payment;
     ImageView contact;
 
@@ -55,7 +58,7 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         getSupportActionBar().hide();
-
+        isPhoneExists = true;
 
         regEmail = (EditText) findViewById(R.id.EmailAddress);
         fname = (EditText)findViewById(R.id.userNameInput);
@@ -80,9 +83,14 @@ public class Register extends AppCompatActivity {
             //Auth
             @Override
             public void onClick(View v) {
+
+                email_exists = false;
+                phone_exists = false;
+                fStore = FirebaseFirestore.getInstance();
+                fAuth = FirebaseAuth.getInstance();
                 rootNode = FirebaseDatabase.getInstance();
                 FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
-
+                isPhoneExists = false;
 //                reference = rootNode.getReference("users");
                 String email = regEmail.getText().toString();
                 String password = regPassword.getText().toString();
@@ -104,57 +112,54 @@ public class Register extends AppCompatActivity {
                 //*****************---realTimeDataBase---**************.
                 //*****************************************************.
                 DatabaseReference users_ref = users_instance.getReference("users");
-                DatabaseReference userName = users_ref.child(phoneNum);
-                ValueEventListener eventListener = new ValueEventListener() {
+                Query checkUserEmail = users_ref.orderByChild("user_email").equalTo(email);
+                Query checkUserPhone= users_ref.orderByChild("user_phone").equalTo(phoneNum);
+
+                checkUserEmail.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(!snapshot.exists()){
-                            fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            checkUserPhone.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        //  FirebaseUser fuser = fAuth.getCurrentUser();
-                                        userID = fAuth.getCurrentUser().getUid();
-                                        DocumentReference documentReference = fStore.collection("users").document(userID);
-                                        Map<String,Object> user = new HashMap<>();
-                                        user.put("fName",fname1);
-                                        user.put("email",email);
-                                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Log.d(TAG, "onSuccess: user Profile is created for "+ userID);
-
-                                            }
-                                        }).addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.d(TAG, "onFailure: " + e.toString());
-                                            }
-                                        });
-                                        UserHelperClass helperClass = new UserHelperClass(fname1,password,email,phoneNum,"A1");
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(!snapshot.exists()){
+                                        UserHelperClass helperClass = new UserHelperClass(fname1, password, email, phoneNum, "A1");
                                         users_ref.child(phoneNum).setValue(helperClass);
                                         Toast.makeText(Register.this, "המשתמש נוצר", Toast.LENGTH_SHORT).show();
-
-
-
-                                    } else {
-                                        Toast.makeText(Register.this, "משתמש בעל אימייל זהה קיים במערכת", Toast.LENGTH_SHORT).show();
+                                    }
+                                    else{
+                                        Toast.makeText(Register.this, "הפלאפון כבר רשום במערכת", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-                            });
 
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
                         else{
-                            Toast.makeText(Register.this, "משתמש בעל טלפון זהה , קיים במערכת.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Register.this, "האימייל כבר רשום במערכת", Toast.LENGTH_SHORT).show();
                         }
+
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                };
-                userName.addListenerForSingleValueEvent((eventListener));
+                });
+
+
+
+
+
+
+
+
+
+
+
                 //לעשות בדיקת קלט למספר טלפון
                 /*
                 if(phoneNum.length() == 10){

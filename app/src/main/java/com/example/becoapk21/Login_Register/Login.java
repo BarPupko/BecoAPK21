@@ -20,13 +20,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
     EditText regEmail, regPassword;
     ImageView contact;
     FirebaseAuth fAuth;
-
+    String passfromDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,18 +78,28 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                Query checkUser = reference.orderByChild("user_phone").equalTo(email);
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(Login.this, "התחברת בהצלחה!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), welcomeSession.class);
-                            startActivity(intent);
-                        }
-                        else{
-                            Toast.makeText(Login.this, "אחד מהפרטים שהזנת שגוי", Toast.LENGTH_SHORT).show();
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            passfromDB = snapshot.child(email).child("user_password").getValue(String.class).trim();
+                            if(passfromDB.equals(password)){
 
+
+
+                            }
+                            else{
+                                Toast.makeText(Login.this, passfromDB, Toast.LENGTH_SHORT).show();
+                            }
                         }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
             }

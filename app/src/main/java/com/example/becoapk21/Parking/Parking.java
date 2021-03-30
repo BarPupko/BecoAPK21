@@ -31,11 +31,10 @@ public class Parking extends AppCompatActivity {
     StorageReference storageReference;
     String userId;
     TextView fullName;
-    ImageView parkBike;
     ImageView getTheBike;
+    ImageView parkTheBike;
     TextView parkTicket;
     ImageView chatSu;
-    boolean isParked=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,14 +47,16 @@ public class Parking extends AppCompatActivity {
         chatSu=findViewById(R.id.chatSupport);
         fAuth = FirebaseAuth.getInstance();
         userId = fAuth.getCurrentUser().getUid();
-        parkBike=(ImageView) findViewById(R.id.parkBike);
-        getTheBike=(ImageView) findViewById(R.id.getTheBike);
+        getTheBike =(ImageView) findViewById(R.id.parkBike);
+        parkTheBike =(ImageView) findViewById(R.id.getTheBike);
         fullName = (TextView)findViewById(R.id.fullName1);
         parkTicket = (TextView)findViewById(R.id.parkTicket);
+        //timer//
+
         getSupportActionBar().hide();
 
 
-         fStore = FirebaseFirestore.getInstance();
+        fStore = FirebaseFirestore.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
 
 
@@ -64,32 +65,22 @@ public class Parking extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplication(), help.class);
                 startActivity(i);
-
             }
         });
+
+        parkTheBike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                    parkTicket.setText("your spot is: " + " ");
+                    //getPhoneNumber and time
+            }
+        });
+
         getTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isParked) {
-                    isParked = true;
-                    Random r = new Random();
-                    char c = (char) (r.nextInt(6) + 'a');
-                    int num = r.nextInt(20) + 1;
-                    String str = " " + c + num;////
-
-                    parkTicket.setText("your spot is: " + str.toUpperCase());
-                }
-
-            }
-        });
-        parkBike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               if(isParked){
-                   parkTicket.setText("");
-
-               }
-               isParked=false;
 
             }
         });

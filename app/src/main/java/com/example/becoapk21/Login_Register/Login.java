@@ -99,17 +99,11 @@ public class Login extends AppCompatActivity {
         });
 
 
-
-
-
-
     }
 
 
-
-
     public void registerNewMember() {
-        Intent intent = new Intent(this, register.class);
+        Intent intent = new Intent(this, Register.class);
         startActivity(intent);
     }
 

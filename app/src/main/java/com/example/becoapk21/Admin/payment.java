@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.becoapk21.R;
-import com.example.becoapk21.Login_Register.register;
+import com.example.becoapk21.Login_Register.Register;
 
 public class payment extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class payment extends AppCompatActivity {
        paypal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent (getApplication(),register.class);
+                Intent i = new Intent (getApplication(), Register.class);
                 startActivity(i);
             }
         });

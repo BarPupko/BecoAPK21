@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.becoapk21.Activities.welcomeSession;
 import com.example.becoapk21.Admin.help;
 import com.example.becoapk21.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,9 +41,7 @@ public class Register extends AppCompatActivity {
     EditText regEmail, regPassword,fname, phoneNumber;
     Button registerEND;
     String userID;
-    FirebaseAuth fAuth;
     FirebaseDatabase rootNode;
-    FirebaseFirestore fStore;
     boolean isPhoneExists;
     boolean phoneExists = false;
     boolean email_exists;
@@ -66,8 +65,6 @@ public class Register extends AppCompatActivity {
         phoneNumber = (EditText)findViewById(R.id.addPhone);
         registerEND = (Button) findViewById(R.id.registerEND);
         contact=(ImageView)findViewById(R.id.contact1);
-        fStore = FirebaseFirestore.getInstance();
-        fAuth = FirebaseAuth.getInstance();
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,13 +81,8 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                email_exists = false;
-                phone_exists = false;
-                fStore = FirebaseFirestore.getInstance();
-                fAuth = FirebaseAuth.getInstance();
                 rootNode = FirebaseDatabase.getInstance();
                 FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
-                isPhoneExists = false;
 //                reference = rootNode.getReference("users");
                 String email = regEmail.getText().toString();
                 String password = regPassword.getText().toString();
@@ -126,6 +118,8 @@ public class Register extends AppCompatActivity {
                                         UserHelperClass helperClass = new UserHelperClass(fname1, password, email, phoneNum, "A1");
                                         users_ref.child(phoneNum).setValue(helperClass);
                                         Toast.makeText(Register.this, "המשתמש נוצר", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                                        startActivity(intent);
                                     }
                                     else{
                                         Toast.makeText(Register.this, "הפלאפון כבר רשום במערכת", Toast.LENGTH_SHORT).show();

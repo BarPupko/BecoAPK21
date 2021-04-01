@@ -16,9 +16,6 @@ import android.widget.Toast;
 import com.example.becoapk21.Activities.welcomeSession;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.help;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,9 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity {
 
-    EditText regEmail, regPassword;
+    EditText regPhoneNumber, regPassword;
     ImageView contact;
-    FirebaseAuth fAuth;
     String passfromDB;
 
     @Override
@@ -44,8 +40,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        fAuth = FirebaseAuth.getInstance();
-        regEmail = (EditText) findViewById(R.id.EmailAddress);
+        regPhoneNumber = (EditText) findViewById(R.id.addPhone1);
         regPassword = (EditText) findViewById(R.id.AddPassword);
         contact=(ImageView)findViewById(R.id.contact2);
 
@@ -61,12 +56,12 @@ public class Login extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = regEmail.getText().toString();
+                String user_phone = regPhoneNumber.getText().toString();
                 String password = regPassword.getText().toString();
 
-                if(TextUtils.isEmpty(email)){
+                if(TextUtils.isEmpty(user_phone)){
                     loginMember();
-                    regEmail.setError("יש להזין אימייל");
+                    regPhoneNumber.setError("יש להזין מספר טלפון");
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
@@ -78,16 +73,21 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
+
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-                Query checkUser = reference.orderByChild("user_phone").equalTo(email);
+                Query checkUser = reference.orderByChild("user_phone").equalTo(user_phone);
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
-                            passfromDB = snapshot.child(email).child("user_password").getValue(String.class).trim();
+                            passfromDB = snapshot.child(user_phone).child("user_password").getValue(String.class).trim();
                             if(passfromDB.equals(password)){
+                            String user_name_fromDB = snapshot.child(user_phone).child("user_name").getValue(String.class).trim();//get the user_name from the phone_number we get.
+                            Intent intent = new Intent(getApplicationContext(),welcomeSession.class);
+                            intent.putExtra("user_phone",user_phone);
+                            intent.putExtra("user_name",user_name_fromDB);
 
-
+                            startActivity(intent);
 
                             }
                             else{
@@ -96,7 +96,6 @@ public class Login extends AppCompatActivity {
                         }
 
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 

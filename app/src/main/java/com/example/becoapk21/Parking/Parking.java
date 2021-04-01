@@ -1,5 +1,6 @@
 package com.example.becoapk21.Parking;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -10,10 +11,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.becoapk21.Activities.welcomeSession;
 import com.example.becoapk21.Admin.help;
 import com.example.becoapk21.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -35,29 +44,32 @@ public class Parking extends AppCompatActivity {
     ImageView parkTheBike;
     TextView parkTicket;
     ImageView chatSu;
-
+    String user_phone;
+    String user_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
+        getSupportActionBar().hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(Parking.this, R.color.design_default_color_background));
         //
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking);
         chatSu=findViewById(R.id.chatSupport);
-        fAuth = FirebaseAuth.getInstance();
-        userId = fAuth.getCurrentUser().getUid();
         getTheBike =(ImageView) findViewById(R.id.parkBike);
         parkTheBike =(ImageView) findViewById(R.id.getTheBike);
         fullName = (TextView)findViewById(R.id.fullName1);
         parkTicket = (TextView)findViewById(R.id.parkTicket);
         //timer//
 
-        getSupportActionBar().hide();
+        //Get data from calling intent
+        Intent intent = getIntent();
+        user_phone = intent.getStringExtra("user_phone");
+        user_name = intent.getStringExtra("user_name");
+        Toast.makeText(Parking.this, user_phone, Toast.LENGTH_SHORT).show();
+        fullName.setText(user_name);
 
 
-        fStore = FirebaseFirestore.getInstance();
-        storageReference = FirebaseStorage.getInstance().getReference();
 
 
         chatSu.setOnClickListener(new View.OnClickListener() {
@@ -71,39 +83,42 @@ public class Parking extends AppCompatActivity {
         parkTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
+                DatabaseReference parking_ref = users_instance.getReference("parked");
+
+                Query checkParked = parking_ref.orderByChild("user_phone").equalTo(user_phone);
+                parking_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            Toast.makeText(Parking.this, "נו מה האופניים כבר בחנייה טיפש", Toast.LENGTH_SHORT).show();
 
 
-                    parkTicket.setText("your spot is: " + " ");
-                    //getPhoneNumber and time
+                        }
+                        else{
+                            Intent i = new Intent(getApplication(),ParkTheBike.class);
+                            i.putExtra("user_phone",user_phone);
+                            startActivity(i);
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
 
         getTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+            Intent i = new Intent(getApplication(),GetTheBike.class);
+            i.putExtra("user_phone",user_phone);
+            startActivity(i);
             }
         });
-
-        DocumentReference documentReference = fStore.collection("users").document(userId);
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if(documentSnapshot.exists()){
-
-                    fullName.setText(documentSnapshot.getString("fName"));
-
-
-                }else {
-                    Log.d("tag", "onEvent: Document do not exists");
-                }
-            }
-
-
-
-
-        });
-
 
 
     }

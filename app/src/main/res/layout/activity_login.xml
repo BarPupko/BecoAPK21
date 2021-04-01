@@ -70,7 +70,7 @@
         app:layout_constraintVertical_bias="0.396" />
 
     <EditText
-        android:id="@+id/EmailAddress"
+        android:id="@+id/addPhone1"
         android:layout_width="324dp"
         android:layout_height="42dp"
         android:layout_marginHorizontal="30dp"

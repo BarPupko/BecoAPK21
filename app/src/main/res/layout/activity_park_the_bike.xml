@@ -11,7 +11,7 @@
         android:layout_width="576dp"
         android:layout_height="952dp"
         app:srcCompat="@drawable/userbackground"
-        tools:layout_editor_absoluteX="-101dp"
+        tools:layout_editor_absoluteX="-99dp"
         tools:layout_editor_absoluteY="-101dp" />
 
     <TextView
@@ -26,12 +26,29 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.064" />
 
-    <Button
-        android:id="@+id/button2"
+    <ImageView
+        android:id="@+id/enterBike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="לחץ אלי אחרי שהכנסת את האופניים"
-        tools:layout_editor_absoluteX="89dp"
-        tools:layout_editor_absoluteY="258dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.361"
+        app:srcCompat="@drawable/putbikeontherail" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="הפקד את האופניים בצורה הבאה"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.579"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.105" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

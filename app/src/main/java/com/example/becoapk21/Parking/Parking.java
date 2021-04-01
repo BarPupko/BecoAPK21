@@ -1,19 +1,16 @@
 package com.example.becoapk21.Parking;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.becoapk21.Activities.welcomeSession;
 import com.example.becoapk21.Admin.help;
 import com.example.becoapk21.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,15 +20,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.Random;
 
 public class Parking extends AppCompatActivity {
 
@@ -114,7 +104,7 @@ public class Parking extends AppCompatActivity {
         getTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent i = new Intent(getApplication(),GetTheBike.class);
+            Intent i = new Intent(getApplication(), GetTheBike.class);
             i.putExtra("user_phone",user_phone);
             startActivity(i);
             }

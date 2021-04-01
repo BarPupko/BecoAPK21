@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BecoAPK21">
-        <activity android:name=".Parking.GetTheBike"></activity>
+        <activity android:name=".Parking.PaymentDetails"/>
         <activity android:name=".Parking.ParkTheBike" />
         <activity android:name=".Admin.users" />
         <activity
@@ -25,8 +25,8 @@
         <activity android:name=".Navigation.wadiNisnas" />
         <activity android:name=".Navigation.batGalim" />
         <activity android:name=".Navigation.carmelRoad" />
-        <activity android:name=".Problems.puncher" />
         <activity android:name=".Activities.ManagerSession" />
+        <activity android:name=".Parking.GetTheBike" />
         <activity android:name=".Navigation.RoadMap" />
         <activity android:name=".Parking.Parking" />
         <activity android:name=".Login_Register.Register" />

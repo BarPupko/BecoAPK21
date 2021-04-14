@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.example.becoapk21.Activities.welcomeSession;
+import com.example.becoapk21.Admin.help;
 import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.Login_Register.Register;
 import com.example.becoapk21.Login_Register.UserHelperClass;
@@ -43,7 +44,7 @@ public class ParkTheBike extends AppCompatActivity {
 
     String parkingSpot;
     Date parkingTime;
-    ImageView addBike;
+    Button addBike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ParkTheBike extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_park_the_bike);
-        addBike = (ImageView) findViewById(R.id.enterBike);
+        addBike = (Button) findViewById(R.id.accept);
         Intent intent = getIntent();
         user_phone = intent.getStringExtra("user_phone");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -70,8 +71,9 @@ public class ParkTheBike extends AppCompatActivity {
                 DatabaseReference parking_ref = users_instance.getReference("parked");
                 ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpot,parkingTime);
                 parking_ref.child(user_phone).setValue(helperClass);
-                Toast.makeText(ParkTheBike.this, "המשתמש נוצר", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(ParkTheBike.this, "האופניים הופקדו בהצלחה!", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(getApplication(), Parking.class);
+                startActivity(i);
             }
         });
 

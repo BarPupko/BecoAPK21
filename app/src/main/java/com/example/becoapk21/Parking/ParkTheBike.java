@@ -40,7 +40,8 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class ParkTheBike extends AppCompatActivity {
     String user_phone;
-
+    String[] parking_spots= new String[100];
+    int current_spot;
     String parkingSpot;
     Date parkingTime;
     ImageView addBike;
@@ -48,6 +49,7 @@ public class ParkTheBike extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
+        current_spot = 0;
         getSupportActionBar().hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(ParkTheBike.this, R.color.design_default_color_background));
         //
@@ -60,8 +62,26 @@ public class ParkTheBike extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         parkingTime = new Date();
         parkingSpot = "A1";
+ //generate parking spot in accordance to what is free
+       FirebaseDatabase.getInstance().getReference().child("parked")
+               .addListenerForSingleValueEvent(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                       for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                           ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);
+                           parking_spots[current_spot++] = (String)user.getParkingSpot();
 
+                       }
+                   }
 
+                   @Override
+                   public void onCancelled(@NonNull DatabaseError error) {
+
+                   }
+               });
+        for(int i = 0 ; i<current_spot;i++){
+            Toast.makeText(ParkTheBike.this, parking_spots[i], Toast.LENGTH_SHORT).show();
+        }
 
         addBike.setOnClickListener(new View.OnClickListener() {
             @Override

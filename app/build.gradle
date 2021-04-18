@@ -41,7 +41,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
 
     //PAYPAL SERVICE
-    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.14.4'
 
     // Declare the dependencies for any other desired Firebase products
     // For example, declare the dependencies for Firebase Authentication and Cloud Firestore

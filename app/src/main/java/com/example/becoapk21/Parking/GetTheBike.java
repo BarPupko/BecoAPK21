@@ -49,7 +49,7 @@ public class GetTheBike extends AppCompatActivity {
 
 
     //PAYPAL SDK VARIABLES
-    public static final int PAYPAL_REQUEST_CODE = 7171;
+    public static final int PAYPAL_REQUEST_CODE = 123;
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);

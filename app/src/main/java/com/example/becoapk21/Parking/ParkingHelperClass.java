@@ -8,6 +8,9 @@ public class ParkingHelperClass {
     String parkingSpot;
     Date parkingTime;
 
+    public ParkingHelperClass(){
+
+    }
     public ParkingHelperClass(String parkingSpot, Date parkingTime) {
         this.parkingSpot = parkingSpot;
         this.parkingTime = parkingTime;

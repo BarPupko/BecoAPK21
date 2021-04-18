@@ -76,8 +76,8 @@ public class Parking extends AppCompatActivity {
                 FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
                 DatabaseReference parking_ref = users_instance.getReference("parked");
 
-                Query checkParked = parking_ref.orderByChild("user_phone").equalTo(user_phone);
-                parking_ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                Query checkParked = parking_ref.orderByKey().equalTo(user_phone);
+                checkParked.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){

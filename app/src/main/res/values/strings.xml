@@ -2,7 +2,7 @@
     <string name="app_name">Beco Wizo</string>
     <string name="password">סיסמא</string>
     <string name="username">שם משתמש</string>
-    <string name="userName">שם משתמש:</string>
+    <string name="userName">מספר טלפון:</string>
     <string name="title_activity_main2">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>

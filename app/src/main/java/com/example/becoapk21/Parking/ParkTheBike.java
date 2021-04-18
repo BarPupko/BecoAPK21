@@ -41,7 +41,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class ParkTheBike extends AppCompatActivity {
     String user_phone;
-    String[] parking_spots= new String[100];
+
     int current_spot;
     String parkingSpot;
     Date parkingTime;
@@ -50,6 +50,7 @@ public class ParkTheBike extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
+        String[] parking_spots= new String[100];
         current_spot = 0;
         getSupportActionBar().hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(ParkTheBike.this, R.color.design_default_color_background));
@@ -70,7 +71,7 @@ public class ParkTheBike extends AppCompatActivity {
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                            ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);
-                           parking_spots[current_spot++] = (String)user.getParkingSpot();
+                           parking_spots[current_spot++] = user.getParkingSpot();
 
                        }
                    }
@@ -80,13 +81,17 @@ public class ParkTheBike extends AppCompatActivity {
 
                    }
                });
-        for(int i = 0 ; i<current_spot;i++){
-            Toast.makeText(ParkTheBike.this, parking_spots[i], Toast.LENGTH_SHORT).show();
-        }
+
+
+
 
         addBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(int i = 0; i<current_spot;i++){
+                    Toast.makeText(ParkTheBike.this,parking_spots[i], Toast.LENGTH_SHORT).show();
+                  //  parkingSpot = "A3";
+                }
                 FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
                 DatabaseReference parking_ref = users_instance.getReference("parked");
                 ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpot,parkingTime);

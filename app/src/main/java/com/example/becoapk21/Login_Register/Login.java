@@ -47,8 +47,6 @@ public class Login extends AppCompatActivity {
         contact=(ImageView)findViewById(R.id.contact2);
 
 
-
-
         Button register = (Button) findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +89,8 @@ public class Login extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(),welcomeSession.class);
                             intent.putExtra("user_phone",user_phone);
                             intent.putExtra("user_name",user_name_fromDB);
+                            //if login successful go to welcome session.
+                            startActivity(intent);
 
                             }
                             else{

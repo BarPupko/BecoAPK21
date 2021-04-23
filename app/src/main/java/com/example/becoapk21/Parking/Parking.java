@@ -81,7 +81,7 @@ public class Parking extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
-                            Toast.makeText(Parking.this, "נו מה האופניים כבר בחנייה טיפש", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Parking.this, "האופניים כבר בחנייה", Toast.LENGTH_SHORT).show();
 
 
                         }

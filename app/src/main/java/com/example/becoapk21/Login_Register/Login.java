@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -43,6 +45,9 @@ public class Login extends AppCompatActivity {
         regPhoneNumber = (EditText) findViewById(R.id.addPhone1);
         regPassword = (EditText) findViewById(R.id.AddPassword);
         contact=(ImageView)findViewById(R.id.contact2);
+
+
+
 
         Button register = (Button) findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
@@ -87,8 +92,6 @@ public class Login extends AppCompatActivity {
                             intent.putExtra("user_phone",user_phone);
                             intent.putExtra("user_name",user_name_fromDB);
 
-                            startActivity(intent);
-
                             }
                             else{
                                 Toast.makeText(Login.this, passfromDB, Toast.LENGTH_SHORT).show();
@@ -126,4 +129,7 @@ public class Login extends AppCompatActivity {
       //  Intent intent = new Intent(getApplicationContext(), welcomeSession.class);
       //  startActivity(intent);
     }
+
+
+
 }

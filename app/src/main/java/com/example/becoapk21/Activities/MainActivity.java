@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.example.becoapk21.Login_Register.Login;
+import com.example.becoapk21.Navigation.MapsActivity5;
 import com.example.becoapk21.R;
 
     public class MainActivity extends AppCompatActivity {
@@ -31,7 +32,7 @@ import com.example.becoapk21.R;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(MainActivity.this, Login.class);
+                Intent intent = new Intent(MainActivity.this, MapsActivity5.class);
                 startActivity(intent);
                 finish();
             }

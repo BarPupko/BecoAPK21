@@ -33,7 +33,7 @@ public class RoadMap extends AppCompatActivity {
         BlueRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Intent = new Intent(getApplicationContext() , batGalim.class);
+                Intent Intent = new Intent(getApplicationContext() , BatGalim.class);
                 startActivity(Intent);
             }
         });
@@ -41,7 +41,7 @@ public class RoadMap extends AppCompatActivity {
         GreenRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Intent = new Intent(getApplicationContext() , carmelRoad.class);
+                Intent Intent = new Intent(getApplicationContext() , CarmelRoad.class);
                 startActivity(Intent);
             }
         });
@@ -49,7 +49,7 @@ public class RoadMap extends AppCompatActivity {
         YellowRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Intent = new Intent(getApplicationContext() , wadiNisnas.class);
+                Intent Intent = new Intent(getApplicationContext() , WadiNisnas.class);
                 startActivity(Intent);
             }
         });
@@ -57,7 +57,7 @@ public class RoadMap extends AppCompatActivity {
         PurpleRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent Intent = new Intent(getApplicationContext() , nevePaz.class);
+                Intent Intent = new Intent(getApplicationContext() , NevePaz.class);
                 startActivity(Intent);
             }
         });

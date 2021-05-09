@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.example.becoapk21.R;
 
-public class managaerCONTROL extends AppCompatActivity {
+public class ManagerControl extends AppCompatActivity {
 
     ImageView bell;//the image I want to call from xml
     ImageView reports;
@@ -21,7 +21,7 @@ public class managaerCONTROL extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(managaerCONTROL.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(ManagerControl.this, R.color.design_default_color_background));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_managaer_c_o_n_t_r_o_l);
@@ -46,7 +46,7 @@ public class managaerCONTROL extends AppCompatActivity {
         userManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplication(), users.class);
+                Intent i = new Intent(getApplication(), Users.class);
                 startActivity(i);
             }
         });
@@ -58,7 +58,7 @@ public class managaerCONTROL extends AppCompatActivity {
 
 
     public void openDialog() {
-        messageDialog messageDialog = new messageDialog();
+        MessageDialog messageDialog = new MessageDialog();
         messageDialog.show(getSupportFragmentManager(), "example dialog");
     }
 

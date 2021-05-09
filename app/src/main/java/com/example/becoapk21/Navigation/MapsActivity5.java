@@ -53,25 +53,31 @@ public class MapsActivity5 extends FragmentActivity implements OnMapReadyCallbac
         //Add a marker in haifa and move the camera
         LatLng haifa = new LatLng(32.796695, 35.0096217);
         LatLng haifa1 = new LatLng(32.8007352, 35.0127974);
+        LatLng haifa2 = new LatLng(32.804323, 35.010142);
 
         // Add a marker in Sydney and move the camera
-        mMap.addMarker(new MarkerOptions().position(haifa).title("haifa").icon(BitmapDescriptorFactory.fromResource(R.drawable.bycicle))).showInfoWindow();
+        mMap.addMarker(new MarkerOptions().position(haifa).title("").icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))).showInfoWindow();
+        mMap.addMarker(new MarkerOptions().position(haifa1).title("").icon(BitmapDescriptorFactory.fromResource(R.drawable.placeholder))).showInfoWindow();
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(haifa, 16));
 
-        //draw route between two locations/points
-        Polyline line = mMap.addPolyline(new PolylineOptions().add(haifa, new LatLng(32.8007352, 35.0127974)).width(25).color(Color.BLUE).geodesic(true));
+        //draw route between two locations/points   32.797755, 35.017058
+        Polyline line = mMap.addPolyline(new PolylineOptions().add(haifa, new LatLng(32.799020, 35.014927)).width(25).color(Color.BLUE).geodesic(true));
+        Polyline line1 = mMap.addPolyline(new PolylineOptions().add(haifa1, new LatLng(32.801482, 35.011000)).width(25).color(Color.BLUE).geodesic(true));
+        Polyline line2 = mMap.addPolyline(new PolylineOptions().add(haifa2, new LatLng(32.804323, 35.010142)).width(25).color(Color.BLUE).geodesic(true));
+        //32.798576, 35.019687
+//        Polyline line1 = mMap.addPolyline(new PolylineOptions().add(haifa1, new LatLng(32.8007352, 35.0127974)).width(25).color(Color.RED).geodesic(true));
 
         //put a mark where user click on map
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                Toast.makeText(MapsActivity5.this, latLng.latitude + "," + latLng.longitude, Toast.LENGTH_SHORT).show();
-
-                mMap.clear();//remove previous marker
-                mMap.addMarker(new MarkerOptions().position(latLng).title("Haifa").icon(BitmapDescriptorFactory.fromResource(R.drawable.help_icon))).showInfoWindow();
-            }
-        });
+//        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+//            @Override
+//            public void onMapClick(LatLng latLng) {
+//                Toast.makeText(MapsActivity5.this, latLng.latitude + "," + latLng.longitude, Toast.LENGTH_SHORT).show();
+//
+//                mMap.clear();//remove previous marker
+////                mMap.addMarker(new MarkerOptions().position(latLng).title("Haifa").icon(BitmapDescriptorFactory.fromResource(R.drawable.help_icon))).showInfoWindow();
+//            }
+//        });
 
     }
 }

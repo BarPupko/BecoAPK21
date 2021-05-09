@@ -2,11 +2,13 @@ package com.example.becoapk21.Parking;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,8 +41,10 @@ public class GetTheBike extends AppCompatActivity {
     String user_phone;
     TextView parkingSpot;
     TextView amountToPay;
+    String parkingSpotString;
     Long time;
-    String parking;
+    char parking;
+    int parkingDigit;
     Date currentDate;
     double timeParked;
     double amount_to_pay;
@@ -71,11 +75,11 @@ public class GetTheBike extends AppCompatActivity {
         Intent intent = getIntent();
         user_phone = intent.getStringExtra("user_phone");
 
-
         FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
         DatabaseReference parking_ref = users_instance.getReference("parked");
         Query checkUser = parking_ref.orderByKey().equalTo(user_phone);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -87,8 +91,11 @@ public class GetTheBike extends AppCompatActivity {
                     amountToPay.setText(Double.toString(amount_to_pay) + " ש''ח ");
 
                     //get the parkingSpot
-                    parking = (String) snapshot.child(user_phone).child("parkingSpot").getValue();
-                    parkingSpot.setText(parking);
+                    parking =  (char)Math.toIntExact((long)snapshot.child(user_phone).child("parkingSpot").getValue());
+                    parkingDigit =  Math.toIntExact((long)snapshot.child(user_phone).child("parkingDigit").getValue());
+                    parkingSpotString=parking+""+parkingDigit;
+                    parkingSpot.setText(parkingSpotString);
+
                 } else {
                     Toast.makeText(GetTheBike.this, "ארור = error", Toast.LENGTH_SHORT).show();
                 }
@@ -134,7 +141,9 @@ public class GetTheBike extends AppCompatActivity {
                 if (confirmation != null) {
                     try {
                         String paymentDetails = confirmation.toJSONObject().toString(4);
+                        //delete entry for phone number on successful paymen
 
+                        //delete node
                         startActivity(new Intent(this,GetTheBike.class)
                                 .putExtra("PaymentDetails", paymentDetails)
                                 .putExtra("PaymentAmount", amount_to_pay)
@@ -146,6 +155,9 @@ public class GetTheBike extends AppCompatActivity {
                     }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
+                //delete parked entry for phone number
+                DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("parked").child(user_phone);
+                dbNode.setValue(null);
                 Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
                 Toast.makeText(this, "Invalid", Toast.LENGTH_LONG).show();

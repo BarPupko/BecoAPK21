@@ -7,12 +7,12 @@ import android.os.Bundle;
 
 import com.example.becoapk21.R;
 
-public class users extends AppCompatActivity {
+public class Users extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(users.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Users.this, R.color.design_default_color_background));
         //
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);

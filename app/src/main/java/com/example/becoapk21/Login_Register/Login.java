@@ -4,9 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,10 +14,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.becoapk21.Activities.welcomeSession;
+import com.example.becoapk21.Activities.WelcomeSession;
 import com.example.becoapk21.R;
-import com.example.becoapk21.Admin.help;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.becoapk21.Admin.Help;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,14 +27,13 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     EditText regPhoneNumber, regPassword;
+    ImageView parkingLocator;
     ImageView contact;
     String passfromDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(Login.this, R.color.design_default_color_background));
-        //
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
@@ -45,8 +42,21 @@ public class Login extends AppCompatActivity {
         regPhoneNumber = (EditText) findViewById(R.id.addPhone1);
         regPassword = (EditText) findViewById(R.id.AddPassword);
         contact=(ImageView)findViewById(R.id.contact2);
+        parkingLocator=(ImageView)findViewById(R.id.parkingLocator1);
 
 
+
+        //parking locator
+       parkingLocator.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent i = new Intent(Intent.ACTION_VIEW,
+                       Uri.parse("google.navigation:q=32.8219025,34.9900802&mode=b"));//mode=b (for bicycle )
+               i.setPackage("com.google.android.apps.maps");
+               startActivity(i);
+           }
+       });
+        //register option
         Button register = (Button) findViewById(R.id.register);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,7 +64,7 @@ public class Login extends AppCompatActivity {
                 registerNewMember();
             }
         });
-
+        //login option
         Button login = (Button) findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +96,7 @@ public class Login extends AppCompatActivity {
                             passfromDB = snapshot.child(user_phone).child("user_password").getValue(String.class).trim();
                             if(passfromDB.equals(password)){
                             String user_name_fromDB = snapshot.child(user_phone).child("user_name").getValue(String.class).trim();//get the user_name from the phone_number we get.
-                            Intent intent = new Intent(getApplicationContext(),welcomeSession.class);
+                            Intent intent = new Intent(getApplicationContext(), WelcomeSession.class);
                             intent.putExtra("user_phone",user_phone);
                             intent.putExtra("user_name",user_name_fromDB);
                             //if login successful go to welcome session.
@@ -111,7 +121,7 @@ public class Login extends AppCompatActivity {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent (getApplication(), help.class);
+                Intent i = new Intent (getApplication(), Help.class);
                 startActivity(i);
             }
         });

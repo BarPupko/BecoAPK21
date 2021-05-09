@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Login_Register.Register;
 
-public class payment extends AppCompatActivity {
+public class Payment extends AppCompatActivity {
 
     ImageView paypal;
 
@@ -20,7 +20,7 @@ public class payment extends AppCompatActivity {
         getSupportActionBar().hide();
 
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(payment.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Payment.this, R.color.design_default_color_background));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);

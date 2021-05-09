@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-public class messageDialog extends AppCompatDialogFragment {
+public class MessageDialog extends AppCompatDialogFragment {
 
     @NonNull
     @Override

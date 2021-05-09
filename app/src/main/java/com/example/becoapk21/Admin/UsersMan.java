@@ -7,13 +7,13 @@ import com.example.becoapk21.R;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-public class usersMan extends AppCompatActivity {
+public class UsersMan extends AppCompatActivity {
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getWindow().setStatusBarColor(ContextCompat.getColor(usersMan.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(UsersMan.this, R.color.design_default_color_background));
         //
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);

@@ -5,24 +5,37 @@ import java.util.Date;
 import java.util.List;
 
 public class ParkingHelperClass {
-    String parkingSpot;
+    int parkingChar;
+    int parkingDigit;
     Date parkingTime;
+    String parked_name;
 
-    public ParkingHelperClass(){
+
+    public ParkingHelperClass() {
 
     }
-    public ParkingHelperClass(String parkingSpot, Date parkingTime) {
-        this.parkingSpot = parkingSpot;
+
+    public ParkingHelperClass(int parkingChar, Date parkingTime, int parkingDigit, String parked_name) {
+        this.parkingChar = parkingChar;
         this.parkingTime = parkingTime;
-
+        this.parkingDigit = parkingDigit;
+        this.parked_name = parked_name;
     }
 
-    public String getParkingSpot() {
-        return parkingSpot;
+    public String getParked_name() {
+        return parked_name;
     }
 
-    public void setParkingSpot(String parkingSpot) {
-        this.parkingSpot = parkingSpot;
+    public int getParkingSpot() {
+        return parkingChar;
+    }
+
+    public int getParkingDigit() {
+        return parkingDigit;
+    }
+
+    public void setParkingSpot(int parkingChar) {
+        this.parkingChar = parkingChar;
     }
 
     public Date getParkingTime() {

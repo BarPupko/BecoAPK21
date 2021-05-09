@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
 
-public class help extends AppCompatActivity {
+public class Help extends AppCompatActivity {
 
     Button send;
 
@@ -22,7 +22,7 @@ public class help extends AppCompatActivity {
         setContentView(R.layout.activity_help);
         getSupportActionBar().hide();
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(help.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Help.this, R.color.design_default_color_background));
 
 
         send = (Button) findViewById(R.id.send);
@@ -31,7 +31,7 @@ public class help extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplication(), Login.class);
                 startActivity(i);
-                Toast.makeText(help.this, "ההודעה נשלחה", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Help.this, "ההודעה נשלחה", Toast.LENGTH_SHORT).show();
 
             }
         });

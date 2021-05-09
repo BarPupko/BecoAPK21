@@ -11,13 +11,13 @@ import android.widget.TextView;
 
 import com.example.becoapk21.R;
 
-public class carmelRoad extends AppCompatActivity {
+public class CarmelRoad extends AppCompatActivity {
     TextView Green;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(carmelRoad.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(CarmelRoad.this, R.color.design_default_color_background));
         //
 
 

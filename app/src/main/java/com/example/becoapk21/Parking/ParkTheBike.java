@@ -1,56 +1,38 @@
 package com.example.becoapk21.Parking;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import com.example.becoapk21.Activities.welcomeSession;
-import com.example.becoapk21.Admin.help;
-import com.example.becoapk21.Login_Register.Login;
-import com.example.becoapk21.Login_Register.Register;
-import com.example.becoapk21.Login_Register.UserHelperClass;
+import com.example.becoapk21.Activities.WelcomeSession;
 import com.example.becoapk21.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class ParkTheBike extends AppCompatActivity {
     String user_phone;
-
+    String parked_user;
+    int parkingDigit;
     int current_spot;
-    String parkingSpot;
+    char parkingSpotLetter;
     Date parkingTime;
     Button addBike;
-
+    char[] parking_spot_letters= new char[100];
+    int[] parking_spot_digits = new int[100];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        String[] parking_spots= new String[100];
+
         current_spot = 0;
         getSupportActionBar().hide();
         getWindow().setStatusBarColor(ContextCompat.getColor(ParkTheBike.this, R.color.design_default_color_background));
@@ -63,19 +45,59 @@ public class ParkTheBike extends AppCompatActivity {
         user_phone = intent.getStringExtra("user_phone");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         parkingTime = new Date();
-        parkingSpot = "A1";
+       parkingSpotLetter = 'A';
+
+        //Generate a parking
+
  //generate parking spot in accordance to what is free
        FirebaseDatabase.getInstance().getReference().child("parked")
                .addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                       for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                       for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                            ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);
-                           parking_spots[current_spot++] = user.getParkingSpot();
+                            parking_spot_letters[current_spot] = (char)user.getParkingSpot();
+                            parking_spot_digits[current_spot++] = user.getParkingDigit();
+
+                            //!!!!!פונקציה קודמת למציאת והכנסת אופניים פנויים!!!!!
+
+                          // parking_spots[current_spot] = user.getParkingSpot();
+
+                           //  Toast.makeText(ParkTheBike.this,"your parking spot is: "+parking_spots[current_spot], Toast.LENGTH_SHORT).show();
 
                        }
-                   }
 
+
+                    /*   Arrays.sort(parking_spots, 0, current_spot);
+                       int difference = 0;
+                       if (parking_spots[0].equals("A1")) {
+                           parkingSpot = "A1";
+                       } else {
+                           for (int i = 0; i < current_spot - 1; i++) {
+                               if (parking_spots[i].length() == 2) {
+                                   difference = Character.getNumericValue(parking_spots[i + 1].charAt(1)) - Character.getNumericValue(parking_spots[i].charAt(1));
+                                   if (difference != 1) {
+                                       parkingSpot = Character.toString(parking_spots[i].charAt(0)) + Character.toString((char) (parking_spots[i].charAt(1) + 1));
+                                       break;
+                                   }
+                                   parkingSpot = Character.toString(parking_spots[current_spot - 1].charAt(0)) + Character.toString((char) (parking_spots[current_spot - 1].charAt(1) + 1));
+                               }
+                               else{
+
+                                   difference = Character.getNumericValue(parking_spots[i + 1].charAt(2)) - Character.getNumericValue(parking_spots[i].charAt(2));
+                                   if (difference != 1) {
+                                       parkingSpot = Character.toString(parking_spots[i].charAt(0)) +Character.toString(parking_spots[i].charAt(1))+ Character.toString((char) (parking_spots[i].charAt(2) + 1));
+                                       break;
+                                   }
+                                   parkingSpot = Character.toString(parking_spots[current_spot - 1].charAt(0)) + Character.toString(parking_spots[current_spot - 1].charAt(1))+Character.toString((char) (parking_spots[current_spot - 1].charAt(2) + 1));
+
+                               }
+                           }
+
+
+                       }
+                       */
+                   }
                    @Override
                    public void onCancelled(@NonNull DatabaseError error) {
 
@@ -84,25 +106,56 @@ public class ParkTheBike extends AppCompatActivity {
 
 
 
-//123
+
+
         addBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i<current_spot;i++){
-                    Toast.makeText(ParkTheBike.this,parking_spots[i], Toast.LENGTH_SHORT).show();
-                  //  parkingSpot = "A3";
+
+                if(current_spot<100) {
+                boolean spot_exists = false;
+
+                    outer:
+                    for(int charC =65;charC<=70;charC++){
+                        for(int Digit=1;Digit<20;Digit++){
+                            spot_exists=false;
+                           for(int i=0;i<current_spot;i++){
+                               if(parking_spot_digits[i]==Digit && (parking_spot_letters[i] == charC)){
+                                  spot_exists=true;
+                               }
+                           }
+                            if(!spot_exists){
+                               parkingSpotLetter=(char)charC;
+                                parkingDigit = Digit;
+                                break outer;
+                            }
+
+                        }
+
+                    }
+
+
+                    Toast.makeText(ParkTheBike.this, "your parking spot is: " + parkingSpotLetter + "" + parkingDigit, Toast.LENGTH_SHORT).show();
+                    FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
+                    DatabaseReference parking_ref = users_instance.getReference("parked");
+                    ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpotLetter, parkingTime, parkingDigit,parked_user);
+                    parking_ref.child(user_phone).setValue(helperClass);
+                    Toast.makeText(ParkTheBike.this, "האופניים הופקדו בהצלחה!", Toast.LENGTH_SHORT).show();
                 }
-                FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
-                DatabaseReference parking_ref = users_instance.getReference("parked");
-                ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpot,parkingTime);
-                parking_ref.child(user_phone).setValue(helperClass);
-                Toast.makeText(ParkTheBike.this, "האופניים הופקדו בהצלחה!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(getApplication(), Parking.class);
+                else{
+                    Toast.makeText(ParkTheBike.this, "אין מקום פנוי", Toast.LENGTH_SHORT).show();
+                }
+                Intent i = new Intent(getApplication(), WelcomeSession.class);
+                i.putExtra("user_phone",user_phone);
+
                 startActivity(i);
+
             }
         });
 
 
     }
+
+
 
 }

@@ -11,33 +11,33 @@ import android.widget.TextView;
 
 import com.example.becoapk21.R;
 
-public class wadiNisnas extends AppCompatActivity {
+public class NevePaz extends AppCompatActivity {
 
-    TextView Yellow;
+
+
+    TextView Purple;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(wadiNisnas.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(NevePaz.this, R.color.design_default_color_background));
         //
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wadi_nisnas);
+        setContentView(R.layout.activity_neve_paz);
         getSupportActionBar().hide();
+        Purple = (TextView) findViewById(R.id.goToPurpleRoad);
+        String purpleMap = "https://www.google.com/maps/dir/32.8211245,34.9968553/Nesher/@32.8161517,34.9895719,14.5z/data=!4m9!4m8!1m0!1m5!1m1!1s0x151dba81e6aaab23:0xf5a48fe039683e6!2m2!1d35.0386443!2d32.7806134!3e1";
 
-        Yellow = (TextView) findViewById(R.id.goToYellowRoad);
 
-        String yellowMap = "https://www.google.com/maps/dir/32.818798,34.9884174/32.8192272,34.984453/32.8165778,34.9907084/32.8078856,35.0006353/32.8046628,34.9994404/32.7991925,35.0025543/@32.8094017,34.9758895,14z/data=!3m1!4b1!4m2!4m1!3e1";
-
-        Yellow.setOnClickListener(new View.OnClickListener() {
-
+        Purple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(yellowMap));
+                i.setData(Uri.parse(purpleMap));
                 startActivity(i);
             }
         });
-
-
     }
+
 }

@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.becoapk21.Admin.help;
+import com.example.becoapk21.Admin.Help;
 import com.example.becoapk21.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -56,7 +56,7 @@ public class Parking extends AppCompatActivity {
         Intent intent = getIntent();
         user_phone = intent.getStringExtra("user_phone");
         user_name = intent.getStringExtra("user_name");
-        Toast.makeText(Parking.this, user_phone, Toast.LENGTH_SHORT).show();
+
         fullName.setText(user_name);
 
 
@@ -65,7 +65,7 @@ public class Parking extends AppCompatActivity {
         chatSu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplication(), help.class);
+                Intent i = new Intent(getApplication(), Help.class);
                 startActivity(i);
             }
         });
@@ -101,14 +101,36 @@ public class Parking extends AppCompatActivity {
             }
         });
 
+
         getTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent i = new Intent(getApplication(), GetTheBike.class);
-            i.putExtra("user_phone",user_phone);
-            startActivity(i);
+                FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
+                DatabaseReference parking_ref = users_instance.getReference("parked");
+
+                Query checkParked = parking_ref.orderByKey().equalTo(user_phone);
+                checkParked.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()){
+                            Intent i = new Intent(getApplication(),GetTheBike.class);
+                            i.putExtra("user_phone",user_phone);
+                            startActivity(i);
+                        }
+                        else{
+                            Toast.makeText(Parking.this, "אין אופניים בחנייה", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
+
 
 
     }

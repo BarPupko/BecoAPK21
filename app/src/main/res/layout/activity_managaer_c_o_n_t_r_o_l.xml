@@ -84,4 +84,16 @@
         app:layout_constraintVertical_bias="0.212"
         app:srcCompat="@drawable/group" />
 
+    <ImageView
+        android:id="@+id/messagesIntent"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.707"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/feedback" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

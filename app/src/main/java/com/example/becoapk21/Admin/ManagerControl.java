@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.example.becoapk21.Activities.WelcomeSession;
+import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
 
 public class ManagerControl extends AppCompatActivity {
@@ -15,13 +17,14 @@ public class ManagerControl extends AppCompatActivity {
     ImageView bell;//the image I want to call from xml
     ImageView reports;
     ImageView userManagement;
+    ImageView messagesIntent;
 
     boolean seeMessage;//if its false we get the image with empty notifications.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(ManagerControl.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(ManagerControl.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_managaer_c_o_n_t_r_o_l);
@@ -29,6 +32,7 @@ public class ManagerControl extends AppCompatActivity {
 
         bell = (ImageView) findViewById(R.id.bell); // calling the image by ID
         userManagement = (ImageView) findViewById(R.id.userManagement);
+        messagesIntent = (ImageView) findViewById(R.id.messagesIntent);
         seeMessage = false;//set seeMessage to false (there is message inside)
 
 
@@ -50,6 +54,15 @@ public class ManagerControl extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        messagesIntent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplication(), MessageReceive.class);
+                startActivity(i);
+            }
+        });
+
 
 
     }

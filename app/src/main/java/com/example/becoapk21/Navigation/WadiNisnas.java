@@ -18,7 +18,7 @@ public class WadiNisnas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(WadiNisnas.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(WadiNisnas.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wadi_nisnas);

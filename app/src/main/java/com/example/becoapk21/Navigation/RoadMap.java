@@ -19,7 +19,7 @@ public class RoadMap extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(RoadMap.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(RoadMap.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_road_map);

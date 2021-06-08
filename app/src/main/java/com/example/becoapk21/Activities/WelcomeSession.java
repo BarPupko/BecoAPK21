@@ -39,7 +39,7 @@ static Random rnd = new Random();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(WelcomeSession.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(WelcomeSession.this, R.color.beco));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_session);
         getSupportActionBar().hide();
@@ -63,7 +63,7 @@ static Random rnd = new Random();
         parking = (ImageView) findViewById(R.id.parking);
 
         //Random Message display into the screen.
-        String[] arr = {"רכיבה על אופניים מגבירה את הריכוז וממריצה את המוח.", "לאכול שווארמה טעים אבל לא בהכרח בריא"};
+        String[] arr = {"רכיבה על אופניים מגבירה את הריכוז וממריצה את המוח.","הרכיבה מעודדת ירידה במשקל וטובה ללב" ,"לאכול שווארמה טעים אבל לא בהכרח בריא"};
         didYouKnowText.setText(arr[random_number]);
 
 
@@ -79,8 +79,11 @@ static Random rnd = new Random();
         //user who manage the application
         if (user_phone.equals("0526333")) {
             isAdmin = true;
+
         } else {
             isAdmin = false;
+            //if you are not manager you cant go to admin session.
+            man.setVisibility(ImageView.GONE);
         }
 
         chatSu.setOnClickListener(new View.OnClickListener() {

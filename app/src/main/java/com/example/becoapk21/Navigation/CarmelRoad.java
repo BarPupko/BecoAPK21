@@ -17,7 +17,7 @@ public class CarmelRoad extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(CarmelRoad.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(CarmelRoad.this, R.color.beco));
         //
 
 

@@ -1,14 +1,26 @@
 package com.example.becoapk21.Parking;
 
+import android.annotation.SuppressLint;
+
 import java.sql.Time;
 import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 
 public class ParkingHelperClass {
     int parkingChar;
     int parkingDigit;
     Date parkingTime;
     String parked_name;
+    Long time;
+    Date currentDate;
+    double timeParked;
+    double amount_to_pay;
+    double parkingFee = 5;
+    double conversion = 1000 * 60 * 60;
+    StringBuilder sb = new StringBuilder();
+    Formatter formatter=new Formatter(sb, Locale.US);
 
 
     public ParkingHelperClass() {
@@ -24,6 +36,10 @@ public class ParkingHelperClass {
 
     public String getParked_name() {
         return parked_name;
+    }
+
+    public void setParked_name(String parked_name) {
+        this.parked_name = parked_name;
     }
 
     public int getParkingSpot() {
@@ -45,6 +61,28 @@ public class ParkingHelperClass {
     public void setParkingTime(Date parkingTime) {
         this.parkingTime = parkingTime;
     }
+
+   //Create method double calculateFee() returns amount user has to pay in according to the time parked
+    public double calculateFee(){
+        time=this.getParkingTime().getTime();
+        currentDate = new Date();
+        timeParked = (double) currentDate.getTime() - time;
+        amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers
+        return amount_to_pay;
+    }
+
+    //Create method String parkingSpot() returns parking spot of the user (connect parkingChar and parkingDigit)
+    public String getFullParkingSpot() {
+        String spotLetter = Character.toString((char)this.getParkingSpot());
+        String spotNumber = Integer.toString(this.getParkingDigit());
+        return spotLetter+spotNumber;
+    }
+
+    //Create method String toString() returns username +parkingSpot + parkingFee as string format without new lines
+    public String toString(){
+        return String.format("%-10s","Namef:"+ this.getParked_name())+String.format(" %-10s","parkingSpot:"+ this.getFullParkingSpot() )+String.format(" %-10s"," fee:"+ this.calculateFee());
+    }
+
 
 
 }

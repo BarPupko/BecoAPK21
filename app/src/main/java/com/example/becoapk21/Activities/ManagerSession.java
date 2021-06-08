@@ -12,7 +12,7 @@ public class ManagerSession extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(ManagerSession.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(ManagerSession.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manager_session);

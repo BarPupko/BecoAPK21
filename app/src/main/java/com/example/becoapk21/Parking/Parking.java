@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.becoapk21.Admin.Help;
+import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,8 +41,9 @@ public class Parking extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
         getSupportActionBar().hide();
-        getWindow().setStatusBarColor(ContextCompat.getColor(Parking.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Parking.this, R.color.beco));
         //
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking);
@@ -58,6 +60,7 @@ public class Parking extends AppCompatActivity {
         user_name = intent.getStringExtra("user_name");
 
         fullName.setText(user_name);
+        Toast.makeText(Parking.this, "you name is : " + user_name, Toast.LENGTH_SHORT).show();
 
 
 
@@ -88,6 +91,7 @@ public class Parking extends AppCompatActivity {
                         else{
                             Intent i = new Intent(getApplication(),ParkTheBike.class);
                             i.putExtra("user_phone",user_phone);
+                            i.putExtra("user_name",user_name);
                             startActivity(i);
                         }
 
@@ -115,6 +119,7 @@ public class Parking extends AppCompatActivity {
                         if(snapshot.exists()){
                             Intent i = new Intent(getApplication(),GetTheBike.class);
                             i.putExtra("user_phone",user_phone);
+                            i.putExtra("user_name",user_name);
                             startActivity(i);
                         }
                         else{

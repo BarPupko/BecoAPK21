@@ -35,7 +35,7 @@ public class ParkTheBike extends AppCompatActivity {
 
         current_spot = 0;
         getSupportActionBar().hide();
-        getWindow().setStatusBarColor(ContextCompat.getColor(ParkTheBike.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(ParkTheBike.this, R.color.beco));
         //
 
         super.onCreate(savedInstanceState);
@@ -45,8 +45,8 @@ public class ParkTheBike extends AppCompatActivity {
         user_phone = intent.getStringExtra("user_phone");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         parkingTime = new Date();
-       parkingSpotLetter = 'A';
-
+        parkingSpotLetter = 'A';
+        parked_user = "";
         //Generate a parking
 
  //generate parking spot in accordance to what is free
@@ -58,7 +58,7 @@ public class ParkTheBike extends AppCompatActivity {
                            ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);
                             parking_spot_letters[current_spot] = (char)user.getParkingSpot();
                             parking_spot_digits[current_spot++] = user.getParkingDigit();
-
+                            parked_user=intent.getStringExtra("user_name");
                             //!!!!!פונקציה קודמת למציאת והכנסת אופניים פנויים!!!!!
 
                           // parking_spots[current_spot] = user.getParkingSpot();
@@ -93,7 +93,6 @@ public class ParkTheBike extends AppCompatActivity {
 
                                }
                            }
-
 
                        }
                        */
@@ -136,6 +135,7 @@ public class ParkTheBike extends AppCompatActivity {
 
 
                     Toast.makeText(ParkTheBike.this, "your parking spot is: " + parkingSpotLetter + "" + parkingDigit, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ParkTheBike.this, "you name is : " + parked_user, Toast.LENGTH_SHORT).show();
                     FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
                     DatabaseReference parking_ref = users_instance.getReference("parked");
                     ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpotLetter, parkingTime, parkingDigit,parked_user);
@@ -147,7 +147,6 @@ public class ParkTheBike extends AppCompatActivity {
                 }
                 Intent i = new Intent(getApplication(), WelcomeSession.class);
                 i.putExtra("user_phone",user_phone);
-
                 startActivity(i);
 
             }

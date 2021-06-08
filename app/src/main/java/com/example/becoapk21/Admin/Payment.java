@@ -20,7 +20,7 @@ public class Payment extends AppCompatActivity {
         getSupportActionBar().hide();
 
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(Payment.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(Payment.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);

@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/Theme.BecoAPK21"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Parking.GetTheBike">
@@ -10,9 +11,11 @@
         android:id="@+id/imageView4"
         android:layout_width="536dp"
         android:layout_height="904dp"
-        app:srcCompat="@drawable/userbackground"
-        tools:layout_editor_absoluteX="-43dp"
-        tools:layout_editor_absoluteY="-87dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/userbackground" />
 
     <TextView
         android:id="@+id/parkingLocation"

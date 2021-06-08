@@ -1,4 +1,4 @@
-package com.example.becoapk21.Login_Register;
+  package com.example.becoapk21.Login_Register;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.becoapk21.Activities.WelcomeSession;
+import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +35,8 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getWindow().setStatusBarColor(ContextCompat.getColor(Login.this, R.color.beco));
+//        getWindow().setNavigationBarColor(ContextCompat.getColor(Login.this, R.color.beco));
         //status bar color
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();

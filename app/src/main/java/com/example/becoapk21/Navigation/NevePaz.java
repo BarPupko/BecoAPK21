@@ -21,7 +21,7 @@ public class NevePaz extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(NevePaz.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(NevePaz.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neve_paz);

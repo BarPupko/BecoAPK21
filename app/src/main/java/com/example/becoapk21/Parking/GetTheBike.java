@@ -10,12 +10,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.becoapk21.Config.Config;
+import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,7 +66,7 @@ public class GetTheBike extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
         getSupportActionBar().hide();
-        getWindow().setStatusBarColor(ContextCompat.getColor(GetTheBike.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(GetTheBike.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_the_bike);
@@ -83,18 +85,22 @@ public class GetTheBike extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    time = (Long) snapshot.child(user_phone).child("parkingTime").child("time").getValue();
-                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-                    currentDate = new Date();
-                    timeParked = (double) currentDate.getTime() - time;
-                    amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers
-                    amountToPay.setText(Double.toString(amount_to_pay) + " ש''ח ");
+
+                    ParkingHelperClass user = snapshot.child(user_phone).getValue(ParkingHelperClass.class);
+                   // time = (Long) snapshot.child(user_phone).child("parkingTime").child("time").getValue();
+                   // currentDate = new Date();
+                    //timeParked = (double) currentDate.getTime() - time;
+                   // amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers
+                   // amountToPay.setText(Double.toString(amount_to_pay) + " ש''ח ");
+                    amount_to_pay=user.calculateFee();
+                   amountToPay.setText(Double.toString(amount_to_pay)+"שח");
 
                     //get the parkingSpot
-                    parking =  (char)Math.toIntExact((long)snapshot.child(user_phone).child("parkingSpot").getValue());
-                    parkingDigit =  Math.toIntExact((long)snapshot.child(user_phone).child("parkingDigit").getValue());
-                    parkingSpotString=parking+""+parkingDigit;
-                    parkingSpot.setText(parkingSpotString);
+                   // parking =  (char)Math.toIntExact((long)snapshot.child(user_phone).child("parkingSpot").getValue());
+                   // parkingDigit =  Math.toIntExact((long)snapshot.child(user_phone).child("parkingDigit").getValue());
+                    //parkingSpotString=parking+""+parkingDigit;
+                   parkingSpot.setText(user.getFullParkingSpot());
+
 
                 } else {
                     Toast.makeText(GetTheBike.this, "ארור = error", Toast.LENGTH_SHORT).show();

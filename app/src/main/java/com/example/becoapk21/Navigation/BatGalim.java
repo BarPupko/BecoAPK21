@@ -16,7 +16,7 @@ public class BatGalim extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(BatGalim.this, R.color.design_default_color_background));
+        getWindow().setStatusBarColor(ContextCompat.getColor(BatGalim.this, R.color.beco));
         //
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bat_galim);

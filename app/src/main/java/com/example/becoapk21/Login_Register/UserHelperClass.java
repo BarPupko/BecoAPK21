@@ -1,19 +1,23 @@
 package com.example.becoapk21.Login_Register;
 
 public class UserHelperClass {
-    private String user_name, user_password, user_email, user_phone, parkingSpot;
+    private String user_name, user_password, user_email, user_phone, parkingSpot, message;
 
     public UserHelperClass() {
 
     }
 
-    public UserHelperClass(String user_name, String user_password, String user_email, String user_phone, String parkingSpot) {
+    public UserHelperClass(String user_name, String user_password, String user_email, String user_phone, String parkingSpot,String message) {
         this.user_name = user_name;
         this.user_password = user_password;
         this.user_email = user_email;
         this.user_phone = user_phone;
         this.parkingSpot = parkingSpot;
+        this.message=message;
     }
+
+
+
 
 
     public String getUser_name() {
@@ -56,4 +60,16 @@ public class UserHelperClass {
         this.parkingSpot = parkingSpot;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String messageString(){
+        return this.getUser_name()+" "+this.getUser_phone()+" \n"+this.getMessage();
+
+    }
 }

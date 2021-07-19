@@ -147,14 +147,13 @@ public class GetTheBike extends AppCompatActivity {
                 if (confirmation != null) {
                     try {
                         String paymentDetails = confirmation.toJSONObject().toString(4);
-                        //delete entry for phone number on successful paymen
+                        //delete entry for phone number on successful payment
 
                         //delete node
                         startActivity(new Intent(this,GetTheBike.class)
                                 .putExtra("PaymentDetails", paymentDetails)
                                 .putExtra("PaymentAmount", amount_to_pay)
                         );
-
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -164,21 +163,19 @@ public class GetTheBike extends AppCompatActivity {
                 //delete parked entry for phone number
                 DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("parked").child(user_phone);
                 dbNode.setValue(null);
-                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "פעולת תשלום , בוטלה.", Toast.LENGTH_SHORT).show();
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
-                Toast.makeText(this, "Invalid", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "אין מספיק כסף בחשבון.", Toast.LENGTH_LONG).show();
         }
     }
 
     private void processPayment() {
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(amount_to_pay), "USD",
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(amount_to_pay), "ILS",
                 "Pay for parking", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payPalPayment);
         startActivityForResult(intent, PAYPAL_REQUEST_CODE);
-
-
     }
 }
 

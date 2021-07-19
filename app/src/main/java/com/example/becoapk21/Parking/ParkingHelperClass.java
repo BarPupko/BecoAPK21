@@ -15,6 +15,7 @@ public class ParkingHelperClass {
     String parked_name;
     Long time;
     Date currentDate;
+    String user_phone;
     double timeParked;
     double amount_to_pay;
     double parkingFee = 5;
@@ -27,12 +28,15 @@ public class ParkingHelperClass {
 
     }
 
-    public ParkingHelperClass(int parkingChar, Date parkingTime, int parkingDigit, String parked_name) {
+    public ParkingHelperClass(int parkingChar, Date parkingTime, int parkingDigit, String parked_name,String user_phone) {
         this.parkingChar = parkingChar;
         this.parkingTime = parkingTime;
         this.parkingDigit = parkingDigit;
         this.parked_name = parked_name;
+        this.user_phone = user_phone;
     }
+
+
 
     public String getParked_name() {
         return parked_name;

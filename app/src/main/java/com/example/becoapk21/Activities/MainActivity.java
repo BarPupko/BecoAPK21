@@ -19,7 +19,7 @@ import com.example.becoapk21.Navigation.RoadMap;
 import com.example.becoapk21.R;
 
     public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN = 2000; //2 sec
+    private static int SPLASH_SCREEN = 2; //2 sec
 
 
     @Override

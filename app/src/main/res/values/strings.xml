@@ -16,4 +16,12 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_maps2">Map</string>
     <string name="title_activity_maps5">Map</string>
+
+
+    <string-array name="use_category">
+        <item>"כללי"</item>
+        <item>"תשלום"</item>
+        <item>"תיקון"</item>
+
+    </string-array>
 </resources>

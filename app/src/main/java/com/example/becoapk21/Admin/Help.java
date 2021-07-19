@@ -7,8 +7,11 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.becoapk21.Activities.WelcomeSession;
@@ -23,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class Help extends AppCompatActivity {
+public class Help extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Button send;
     EditText userComplaint;
@@ -34,7 +37,12 @@ public class Help extends AppCompatActivity {
     String parkingSpot;
     String message;
     String messageFromDB;
+    Spinner spinner;
+    int messageType;
+    boolean parked;
+
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
@@ -45,10 +53,19 @@ public class Help extends AppCompatActivity {
 
         //variables EditText to receive the content
         userComplaint = (EditText) findViewById(R.id.userComplaint);
-        editTextUserPhoneNumber1=(EditText)findViewById(R.id.editTextPhoneNumber);
+        spinner = findViewById(R.id.spinner1);
+        editTextUserPhoneNumber1 = (EditText) findViewById(R.id.editTextPhoneNumber);
         //get the user_phone from Database.
         Intent intent = getIntent();
         user_phone = intent.getStringExtra("user_phone");
+        messageType=-1;
+
+
+        //Spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.use_category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
 
         //send message
         send = (Button) findViewById(R.id.send);
@@ -61,20 +78,23 @@ public class Help extends AppCompatActivity {
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
+                        if (snapshot.exists()) {
                             messageFromDB = snapshot.child(user_phone).child("message").getValue(String.class).trim();
-                            if(messageFromDB.equals("")){
-                                reference.child(user_phone).child("message").setValue(userComplaint.getText().toString());
-                                Toast.makeText(Help.this, "ההודעה נשלחה", Toast.LENGTH_SHORT).show();
+                            if (messageFromDB.equals("")) {
+                                reference.child(user_phone).child("message").setValue(userComplaint.getText().toString());//כתיבה ל-DB את תוכן ההודעה
+                                reference.child(user_phone).child("messageType").setValue(messageType);//כתיבה ל-DB את סוג ההודעה
                             }
                         }
                         Toast.makeText(Help.this, "במידה והמשתמש קיים , ההודעה נשלחה.", Toast.LENGTH_SHORT).show();
 
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
+
+
                 });
 
 
@@ -109,6 +129,16 @@ public class Help extends AppCompatActivity {
 
     }
 
-    ;
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String text = parent.getItemAtPosition(position).toString();
+        messageType = position;
+        Toast.makeText(parent.getContext(),text,Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 
 }

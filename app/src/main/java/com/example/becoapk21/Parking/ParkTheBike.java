@@ -138,7 +138,7 @@ public class ParkTheBike extends AppCompatActivity {
                     Toast.makeText(ParkTheBike.this, "you name is : " + parked_user, Toast.LENGTH_SHORT).show();
                     FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
                     DatabaseReference parking_ref = users_instance.getReference("parked");
-                    ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpotLetter, parkingTime, parkingDigit,parked_user);
+                    ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpotLetter, parkingTime, parkingDigit,parked_user,"123");
                     parking_ref.child(user_phone).setValue(helperClass);
                     Toast.makeText(ParkTheBike.this, "האופניים הופקדו בהצלחה!", Toast.LENGTH_SHORT).show();
                 }

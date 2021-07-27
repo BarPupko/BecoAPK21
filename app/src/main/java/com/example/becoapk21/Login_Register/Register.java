@@ -132,29 +132,6 @@ public class Register extends AppCompatActivity {
                     }
                 });
 
-
-
-
-
-
-
-
-
-
-
-                //לעשות בדיקת קלט למספר טלפון
-                /*
-                if(phoneNum.length() == 10){
-                    regPassword.setError("הסיסמא חייבת להכיל לפחות 6 תווים");
-                    return;
-                }
-                */
-
-            //    Member member1 = new Member(email, password,fname1);
-//               reference.setValue(member1);
-
-
-
             }
         });
 

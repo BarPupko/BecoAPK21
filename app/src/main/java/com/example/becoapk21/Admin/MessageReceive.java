@@ -50,8 +50,8 @@ public class MessageReceive extends AppCompatActivity {
                         mLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
                         int count_user_message = 0;
                         for (int i = 0; i < count; i++) {
-                            if (user_array[i].getMessage() != null) {
-                                mLayout.addView(createNewTextView(user_array[i].messageString(), i));
+                            if (user_array[i].getMessage()!=null && !user_array[i].getMessage().equals("")) {//יציג רק הודעות שאינן ריקות
+                                mLayout.addView(createNewTextView(user_array[i].messageString(), i,user_array[i].getMessageType()));
                                 count_user_message++;
                             }
                         }
@@ -70,13 +70,19 @@ public class MessageReceive extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")//importing this function to use any text we like ,inside "setText("text")"
-    private TextView createNewTextView(String description, int id) {
+    private TextView createNewTextView(String description, int id,int messageType) {
         final RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         final TextView name = new TextView(this);
-        lparams.setMargins(150, (id + 1) * 100, 0, 0); //location of the text
+        lparams.setMargins(30, (id + 1) * 100, 400, 0); //location of the text
         name.setId(id);
         name.setLayoutParams(lparams);
-        name.setTextColor(Color.WHITE); // text color
+        if(messageType==0) {
+            name.setTextColor(Color.YELLOW); // regular text color
+        }else if(messageType==1){
+            name.setTextColor(Color.BLUE); // payment color
+        }else{
+            name.setTextColor(Color.RED); // fixing color
+        }
         name.setText(description);
         Button delBtn = new Button(this);
         final RelativeLayout.LayoutParams buttonLocation = new RelativeLayout.LayoutParams(150, 100);

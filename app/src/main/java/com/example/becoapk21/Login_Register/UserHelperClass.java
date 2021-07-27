@@ -18,6 +18,13 @@ public class UserHelperClass {
         this.message="";
     }
 
+    public int getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(int messageType) {
+        this.messageType = messageType;
+    }
 
     public String getUser_name() {
         return user_name;

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.becoapk21.Admin.ManagerControl;
 import com.example.becoapk21.Navigation.RoadMap;
+import com.example.becoapk21.Parking.FixBike;
 import com.example.becoapk21.Parking.Parking;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
@@ -63,9 +64,19 @@ static Random rnd = new Random();
         parking = (ImageView) findViewById(R.id.parking);
 
         //Random Message display into the screen.
-        String[] arr = {"רכיבה על אופניים מגבירה את הריכוז וממריצה את המוח.","הרכיבה מעודדת ירידה במשקל וטובה ללב" ,"לאכול שווארמה טעים אבל לא בהכרח בריא"};
+        String[] arr = {
+                "רכיבה על אופניים מגבירה את הריכוז וממריצה את המוח.","הרכיבה מעודדת ירידה במשקל וטובה ללב"
+                ,"לאכול שווארמה טעים אבל לא בהכרח בריא"};
         didYouKnowText.setText(arr[random_number]);
 
+
+        fix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplication(), FixBike.class);
+                startActivity(i);
+            }
+        });
 
         fullName.setText(user_name);
         parking.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +84,6 @@ static Random rnd = new Random();
             public void onClick(View v) {
                 parking();
             }
-
         });
 
         //user who manage the application
@@ -122,4 +132,6 @@ static Random rnd = new Random();
         intent.putExtra("user_phone",user_phone);
         startActivity(intent);
     }
+
+
 }

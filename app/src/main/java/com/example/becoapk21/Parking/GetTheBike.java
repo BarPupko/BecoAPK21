@@ -103,7 +103,7 @@ public class GetTheBike extends AppCompatActivity {
 
 
                 } else {
-                    Toast.makeText(GetTheBike.this, "ארור = error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GetTheBike.this, "error", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -162,7 +162,7 @@ public class GetTheBike extends AppCompatActivity {
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 //delete parked entry for phone number
                 DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("parked").child(user_phone);
-                dbNode.setValue(null);
+              //  dbNode.setValue(null);//מחיקה במידה ונצטרך בעת ביטול
                 Toast.makeText(this, "פעולת תשלום , בוטלה.", Toast.LENGTH_SHORT).show();
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
                 Toast.makeText(this, "אין מספיק כסף בחשבון.", Toast.LENGTH_LONG).show();

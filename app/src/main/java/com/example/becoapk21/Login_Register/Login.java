@@ -77,10 +77,11 @@ public class Login extends AppCompatActivity {
                 String password = regPassword.getText().toString();
 
                 if(TextUtils.isEmpty(user_phone)){
-                    loginMember();
                     regPhoneNumber.setError("יש להזין מספר טלפון");
                     return;
                 }
+
+
                 if(TextUtils.isEmpty(password)){
                     regPassword.setError("יש להזין סיסמא");
                     return;
@@ -133,16 +134,11 @@ public class Login extends AppCompatActivity {
 
     }
 
-
     public void registerNewMember() {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
     }
 
-    public void loginMember() {
-      //  Intent intent = new Intent(getApplicationContext(), welcomeSession.class);
-      //  startActivity(intent);
-    }
 
 
 

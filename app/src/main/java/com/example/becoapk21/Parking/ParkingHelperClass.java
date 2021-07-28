@@ -7,7 +7,13 @@ import java.util.Date;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
-
+/*
+                       ParingHelperClass.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will show information regarding bike Track
+            and if the user want it will redirect to the BatGalim Track
+            -------------------------------------------------------------
+ */
 public class ParkingHelperClass {
     int parkingChar;
     int parkingDigit;

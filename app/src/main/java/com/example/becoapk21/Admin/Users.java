@@ -29,6 +29,16 @@ import com.google.firebase.firestore.auth.User;
 
 import java.util.Date;
 
+/*
+                        Users.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will present all the users that already parked
+            their bicycle , the amount they need to pay and the location
+            of the bike inside the parking.
+            we can unbound the bicycle from the parking by clicking on X.
+            -------------------------------------------------------------
+ */
+
  public class Users extends AppCompatActivity {
      Date currentDate;
      Double amount_to_pay;

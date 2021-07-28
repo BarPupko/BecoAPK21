@@ -10,7 +10,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.becoapk21.R;
-
+/*
+                       WadiNisnas.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will show information regarding bike Track
+            and if the user want it will redirect to the WadiNisnas Track
+            -------------------------------------------------------------
+ */
 public class WadiNisnas extends AppCompatActivity {
 
     TextView Yellow;

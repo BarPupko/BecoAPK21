@@ -26,12 +26,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+  /*                          Login.java ---> INFORMATION
+              ------------------------------------------------------------
+              Login intent has 4 buttons , contact(help) , get to parking
+              location(using gps) , login (after entering the credentials).
+              register(if the user don't register already.)
+              -------------------------------------------------------------
+   */
 public class Login extends AppCompatActivity {
 
-    EditText regPhoneNumber, regPassword;
-    ImageView parkingLocator;
-    ImageView contact;
-    String passfromDB;
+    EditText regPhoneNumber, regPassword;//variables that will store the user phone number and password
+    ImageView parkingLocator;//variables store all the parking location.
+    ImageView contact; //contact button that will be redirect to Help.java.
+    String passfromDB; // recieveing the password from the database to check if is matches the password was entered in EditText.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +82,14 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
                 String user_phone = regPhoneNumber.getText().toString();
                 String password = regPassword.getText().toString();
-
+                //showing the next message if user didn't enter right phone number.
                 if(TextUtils.isEmpty(user_phone)){
                     regPhoneNumber.setError("יש להזין מספר טלפון");
+                    return;
+                }
+
+                if(user_phone.length() != 7){//change later to 10 digits
+                    regPhoneNumber.setError("יש להזין מספר טלפון בעל 10 ספרות");
                     return;
                 }
 
@@ -91,25 +103,29 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-
+                //connect into firebase and enter users DB
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+                //create query in which the phones orders in in specific path.
                 Query checkUser = reference.orderByChild("user_phone").equalTo(user_phone);
+                //check if the user is exists.
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){
+                        if(snapshot.exists()){//if the DB credentials exists please enter the data base and do the series commands.
                             passfromDB = snapshot.child(user_phone).child("user_password").getValue(String.class).trim();
-                            if(passfromDB.equals(password)){
+                            if(passfromDB.equals(password)){//check if the password match's the password received from the user in EditText.
                             String user_name_fromDB = snapshot.child(user_phone).child("user_name").getValue(String.class).trim();//get the user_name from the phone_number we get.
                             Intent intent = new Intent(getApplicationContext(), WelcomeSession.class);
                             intent.putExtra("user_phone",user_phone);
                             intent.putExtra("user_name",user_name_fromDB);
                             //if login successful go to welcome session.
-                            startActivity(intent);
+                            startActivity(intent);//if it exists move to welcome Session intent
 
                             }
                             else{
-                                Toast.makeText(Login.this, passfromDB, Toast.LENGTH_SHORT).show();
+                                System.out.println("else");
+                                //showing password for the user that connected
+//                                Toast.makeText(Login.this, passfromDB, Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -134,6 +150,7 @@ public class Login extends AppCompatActivity {
 
     }
 
+    //move to register intent.
     public void registerNewMember() {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);

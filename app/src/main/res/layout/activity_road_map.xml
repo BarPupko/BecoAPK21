@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="538dp"
-        android:layout_height="386dp"
+        android:layout_height="400dp"
         android:layout_marginBottom="396dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,9 +179,8 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imageView18"
         app:layout_constraintEnd_toEndOf="@+id/imageView19"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView14"
-        app:layout_constraintTop_toBottomOf="@+id/imageView17"
-        app:layout_constraintVertical_bias="0.385" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.929" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

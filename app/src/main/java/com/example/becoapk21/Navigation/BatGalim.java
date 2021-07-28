@@ -9,7 +9,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.becoapk21.R;
-
+/*
+                       BatGalim.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will show information regarding bike Track
+            and if the user want it will redirect to the BatGalim Track
+            -------------------------------------------------------------
+ */
 public class BatGalim extends AppCompatActivity {
     TextView Blue;
     @Override

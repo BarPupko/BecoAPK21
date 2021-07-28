@@ -11,24 +11,32 @@ import android.widget.ImageView;
 import com.example.becoapk21.Activities.WelcomeSession;
 import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
-
+/*
+                        ManagerControl.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will present all function the manager can do
+            such as:
+            1.bell ring will show general instruction for the manager.
+            2.intent to manage any user that already parked their bike.
+            3.intent to manage any new message regarding any issue.
+            -------------------------------------------------------------
+ */
 public class ManagerControl extends AppCompatActivity {
 
     ImageView bell;//the image I want to call from xml
-    ImageView reports;
-    ImageView userManagement;
-    ImageView messagesIntent;
-
+    ImageView userManagement; //picture to intent that's showing us all users including the parking location and amount of money to pay.
+    ImageView messagesIntent; //picture to intent that's showing us all messages from users who sent message
     boolean seeMessage;//if its false we get the image with empty notifications.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
         getWindow().setStatusBarColor(ContextCompat.getColor(ManagerControl.this, R.color.beco));
-        //
+        getSupportActionBar().hide(); //hide status bar title
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_managaer_c_o_n_t_r_o_l);
-        getSupportActionBar().hide();
+
 
         bell = (ImageView) findViewById(R.id.bell); // calling the image by ID
         userManagement = (ImageView) findViewById(R.id.userManagement);
@@ -43,10 +51,11 @@ public class ManagerControl extends AppCompatActivity {
                 openDialog();
                 seeMessage = true; //if it true , please send the notification picture if empty notifications
                 if(seeMessage)
-                bell.setImageResource(R.drawable.notificationzero);
+                bell.setImageResource(R.drawable.notificationzero);//bell will display zero notification
             }
         });
 
+        // by clicking on messageIntent we will move into next Intent (userManagement) class)
         userManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +64,7 @@ public class ManagerControl extends AppCompatActivity {
             }
         });
 
+        // by clicking on messageIntent we will move into next Intent (messageReceive class)
         messagesIntent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +79,9 @@ public class ManagerControl extends AppCompatActivity {
 
 
 
-
+    //open dialog message if user clicks the bell.
     public void openDialog() {
-        MessageDialog messageDialog = new MessageDialog();
+        MessageDialog messageDialog = new MessageDialog();//moving into another intent called MessageDialog and present the content of the dialog.
         messageDialog.show(getSupportFragmentManager(), "example dialog");
     }
 

@@ -18,7 +18,6 @@
         android:theme="@style/Theme.BecoAPK21">
         <activity android:name=".Parking.FixBike"></activity>
         <activity android:name=".Admin.MessageReceive" />
-        <activity android:name=".Admin.Fix" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -31,10 +30,6 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity
-            android:name=".Navigation.MapsActivity5"
-            android:label="@string/title_activity_maps5" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -46,14 +41,12 @@
             android:name=".Admin.UsersMan"
             android:label="@string/title_activity_users_man"
             android:theme="@style/Theme.BecoAPK21.NoActionBar" />
-        <activity android:name=".Admin.Payment" />
         <activity android:name=".Admin.Help" />
         <activity android:name=".Admin.ManagerControl" />
         <activity android:name=".Navigation.NevePaz" />
         <activity android:name=".Navigation.WadiNisnas" />
         <activity android:name=".Navigation.BatGalim" />
         <activity android:name=".Navigation.CarmelRoad" />
-        <activity android:name=".Activities.ManagerSession" />
         <activity android:name=".Parking.GetTheBike" />
         <activity android:name=".Navigation.RoadMap" />
         <activity android:name=".Parking.Parking" />

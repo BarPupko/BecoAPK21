@@ -1,5 +1,15 @@
 package com.example.becoapk21.Login_Register;
 
+
+/*
+                        Users.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will present all the users that already parked
+            their bicycle , the amount they need to pay and the location
+            of the bike inside the parking.
+            we can unbound the bicycle from the parking by clicking on X.
+            -------------------------------------------------------------
+ */
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;

@@ -18,7 +18,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+/*
+                       ParkTheBike.java ---> INFORMATION
+            ------------------------------------------------------------
+            This class manages data from all the intents , regarding the parking.
 
+            -------------------------------------------------------------
+ */
 public class ParkTheBike extends AppCompatActivity {
     String user_phone;
     String parked_user;
@@ -27,8 +33,8 @@ public class ParkTheBike extends AppCompatActivity {
     char parkingSpotLetter;
     Date parkingTime;
     Button addBike;
-    char[] parking_spot_letters= new char[100];
-    int[] parking_spot_digits = new int[100];
+    char[] parking_spot_letters= new char[100];//array contains letters
+    int[] parking_spot_digits = new int[100];//array contains digits
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
@@ -45,8 +51,8 @@ public class ParkTheBike extends AppCompatActivity {
         user_phone = intent.getStringExtra("user_phone");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         parkingTime = new Date();
-        parkingSpotLetter = 'A';
-        parked_user = "";
+        parkingSpotLetter = 'A'; //default value for letter
+        parked_user = ""; //default value for user name
         //Generate a parking
 
  //generate parking spot in accordance to what is free
@@ -112,37 +118,37 @@ public class ParkTheBike extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(current_spot<100) {
-                boolean spot_exists = false;
-
+                boolean spot_exists = false; // check if spot already exits , if not i will give user this spot.
+                //creating a place for a new bike
                     outer:
-                    for(int charC =65;charC<=70;charC++){
-                        for(int Digit=1;Digit<20;Digit++){
+                    for(int charC =65;charC<=70;charC++){//first end the first letter
+                        for(int Digit=1;Digit<20;Digit++){//find new available digit in this letter
                             spot_exists=false;
                            for(int i=0;i<current_spot;i++){
                                if(parking_spot_digits[i]==Digit && (parking_spot_letters[i] == charC)){
                                   spot_exists=true;
                                }
                            }
-                            if(!spot_exists){
+                            if(!spot_exists){//if spot not exist it will give this user new spot using letter and digits.
                                parkingSpotLetter=(char)charC;
                                 parkingDigit = Digit;
-                                break outer;
+                                break outer; // get back  to the outer loop.
                             }
 
                         }
 
                     }
 
-
+                    //information for user , if it find's him a spot in parking.
                     Toast.makeText(ParkTheBike.this, "your parking spot is: " + parkingSpotLetter + "" + parkingDigit, Toast.LENGTH_SHORT).show();
-                    Toast.makeText(ParkTheBike.this, "you name is : " + parked_user, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(ParkTheBike.this, "you name is : " + parked_user, Toast.LENGTH_SHORT).show();
                     FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
                     DatabaseReference parking_ref = users_instance.getReference("parked");
                     ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpotLetter, parkingTime, parkingDigit,parked_user,"123");
                     parking_ref.child(user_phone).setValue(helperClass);
                     Toast.makeText(ParkTheBike.this, "האופניים הופקדו בהצלחה!", Toast.LENGTH_SHORT).show();
                 }
-                else{
+                else{//error for user , if there are not empty space for user.
                     Toast.makeText(ParkTheBike.this, "אין מקום פנוי", Toast.LENGTH_SHORT).show();
                 }
                 Intent i = new Intent(getApplication(), WelcomeSession.class);

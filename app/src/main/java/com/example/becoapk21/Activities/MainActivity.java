@@ -6,20 +6,22 @@ import androidx.core.content.ContextCompat;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.example.becoapk21.Admin.ManagerControl;
-import com.example.becoapk21.Admin.Users;
-import com.example.becoapk21.Admin.UsersMan;
 import com.example.becoapk21.Login_Register.Login;
-import com.example.becoapk21.Navigation.MapsActivity5;
-import com.example.becoapk21.Navigation.RoadMap;
 import com.example.becoapk21.R;
-
+    /*
+                    MainActivity.JAVA ---> INFORMATION
+                ------------------------------------------------------------
+                this intent is showing us the loading logo at the start and
+                redirect the user into login intent.
+                you can set the background image , display time , and redirect
+                the intent to anyplace you want.
+                -------------------------------------------------------------
+     */
     public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN = 2; //2 sec
+    private static int SPLASH_SCREEN = 2000; //2000milisec ==> 2 sec
 
 
     @Override
@@ -30,10 +32,9 @@ import com.example.becoapk21.R;
         getSupportActionBar().hide();
 
         //status bar color
-        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.design_default_color_background));
-        //
+        getWindow().setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.white));
 
-
+        //move the user into another intent
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -43,6 +44,8 @@ import com.example.becoapk21.R;
             }
         },SPLASH_SCREEN);
     }
+
+    //RULES for any device.
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

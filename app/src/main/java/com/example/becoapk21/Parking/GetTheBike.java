@@ -36,7 +36,17 @@ import org.json.JSONException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+/*
+                      GetTheBike.java ---> INFORMATION
+            ------------------------------------------------------------
+            PayPal api intent , will receive the amount of money the user
+            need to pay from the database , and this information will moved
+            to PayPal Api then the user will see the amount of money he need to pay
+            he will need to connect into his user , and then to getThePay.
+            if the pay is successful the user will get his bike back and his information from the
+            database will be removed.
+            -------------------------------------------------------------
+ */
 public class GetTheBike extends AppCompatActivity {
 
 
@@ -170,7 +180,7 @@ public class GetTheBike extends AppCompatActivity {
     }
 
     private void processPayment() {
-        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(amount_to_pay), "ILS",
+        PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(amount_to_pay), "ILS",//Paypal showing the currency user need to pay
                 "Pay for parking", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(this, PaymentActivity.class);
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config);

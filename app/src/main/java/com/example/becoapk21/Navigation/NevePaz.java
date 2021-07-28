@@ -10,7 +10,13 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.becoapk21.R;
-
+/*
+                       NevePaz.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will show information regarding bike Track
+            and if the user want it will redirect to the NevePaz Track
+            -------------------------------------------------------------
+ */
 public class NevePaz extends AppCompatActivity {
 
 

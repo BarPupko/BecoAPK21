@@ -19,7 +19,15 @@ import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
 import com.google.firebase.auth.FirebaseAuth;
 
-//static
+/*
+                        WelcomeSession.java ---> INFORMATION
+            ---------------------------------------------------------------
+            this intent will present all the functions after the user LOGIN
+            it will show their name, the function they can use.
+            if the user is a manager i will show another that only showing up
+            for the manager.
+            -----------------------------------------------------------------
+ */
 
 public class WelcomeSession<first_name> extends AppCompatActivity {
 static Random rnd = new Random();
@@ -49,7 +57,7 @@ static Random rnd = new Random();
         Intent intent = getIntent();
          user_phone = intent.getStringExtra("user_phone");
          user_name = intent.getStringExtra("user_name");
-        Toast.makeText(WelcomeSession.this, user_phone, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(WelcomeSession.this, user_phone, Toast.LENGTH_SHORT).show();
         //Get data from calling intent
         chatSu = (ImageView) findViewById(R.id.chatSupport);
         fix = (ImageView) findViewById(R.id.fix1);

@@ -23,7 +23,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.StorageReference;
+/*
+                       Parking.java ---> INFORMATION
+            ------------------------------------------------------------
+            This class manages data from all the intents , regarding the parking.
 
+            -------------------------------------------------------------
+ */
 public class Parking extends AppCompatActivity {
 
     FirebaseAuth fAuth;
@@ -60,7 +66,7 @@ public class Parking extends AppCompatActivity {
         user_name = intent.getStringExtra("user_name");
 
         fullName.setText(user_name);
-        Toast.makeText(Parking.this, "you name is : " + user_name, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(Parking.this, "you name is : " + user_name, Toast.LENGTH_SHORT).show();
 
 
 

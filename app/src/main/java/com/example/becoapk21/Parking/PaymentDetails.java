@@ -10,7 +10,13 @@ import com.example.becoapk21.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
+/*
+                       PaymentDetails.java ---> INFORMATION
+            ------------------------------------------------------------
+            thisClass will show in intent the amount of payment user need to pay
+            for the parking.
+            -------------------------------------------------------------
+ */
 public class PaymentDetails extends AppCompatActivity {
 
     TextView txtId,txtAmount,txtStatus;

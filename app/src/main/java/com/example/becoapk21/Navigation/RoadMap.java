@@ -10,6 +10,14 @@ import android.widget.TextView;
 
 import com.example.becoapk21.R;
 
+/*
+                      RoadMap.java ---> INFORMATION
+            ------------------------------------------------------------
+            this intent will show a selection of tracks across haifa
+            the user will pick one of the tracks and will be redirect
+            to the intent.
+            -------------------------------------------------------------
+ */
 public class RoadMap extends AppCompatActivity {
     TextView BlueRoad;
     TextView GreenRoad;

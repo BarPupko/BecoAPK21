@@ -26,7 +26,7 @@ public class UserHelperClass {
         this.user_phone = user_phone; //phone number from the user
         this.parkingSpot = parkingSpot; // parking spot the user parked the bike
         this.messageType = messageType; //0 -> כללי 1-> תשלום 2-> תיקון
-        this.isAdmin = false;
+        this.isAdmin = isAdmin;
         this.message = ""; //staring message from empty
     }
 
@@ -87,7 +87,8 @@ public class UserHelperClass {
         this.message = message;
     }
 
-    public boolean isAdmin() { return isAdmin; }
+    //if we will write the getters as 'isAdmin' it will create a problem during running.
+    public boolean getIsAdmin() { return isAdmin; }
 
     public void setAdmin(boolean isAdmin) { this.isAdmin = isAdmin; }
 

@@ -2,22 +2,33 @@ package com.example.becoapk21.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.Random;
 
+import java.util.Random;
+import java.util.concurrent.CountDownLatch;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.becoapk21.Admin.ManagerControl;
 import com.example.becoapk21.Navigation.RoadMap;
 import com.example.becoapk21.Parking.FixBike;
+import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.Parking.Parking;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /*
                         WelcomeSession.java ---> INFORMATION
@@ -30,7 +41,7 @@ import com.google.firebase.auth.FirebaseAuth;
  */
 
 public class WelcomeSession<first_name> extends AppCompatActivity {
-static Random rnd = new Random();
+    static Random rnd = new Random();
 
     private ImageView parking;//park Bicycle
     FirebaseAuth fAuth;
@@ -55,8 +66,8 @@ static Random rnd = new Random();
 
         //Get data from calling intent
         Intent intent = getIntent();
-         user_phone = intent.getStringExtra("user_phone");
-         user_name = intent.getStringExtra("user_name");
+        user_phone = intent.getStringExtra("user_phone");
+        user_name = intent.getStringExtra("user_name");
 //        Toast.makeText(WelcomeSession.this, user_phone, Toast.LENGTH_SHORT).show();
         //Get data from calling intent
         chatSu = (ImageView) findViewById(R.id.chatSupport);
@@ -67,14 +78,14 @@ static Random rnd = new Random();
         fullName = (TextView) findViewById(R.id.fullName2);
 
         fAuth = FirebaseAuth.getInstance();
-        random_number=rnd.nextInt(2);
+        random_number = rnd.nextInt(2);
         man = (ImageView) findViewById(R.id.man);
         parking = (ImageView) findViewById(R.id.parking);
 
         //Random Message display into the screen.
         String[] arr = {
-                "רכיבה על אופניים מגבירה את הריכוז וממריצה את המוח.","הרכיבה מעודדת ירידה במשקל וטובה ללב"
-                ,"לאכול שווארמה טעים אבל לא בהכרח בריא"};
+                "רכיבה על אופניים מגבירה את הריכוז וממריצה את המוח.", "הרכיבה מעודדת ירידה במשקל וטובה ללב"
+                , "לאכול שווארמה טעים אבל לא בהכרח בריא"};
         didYouKnowText.setText(arr[random_number]);
 
 
@@ -93,16 +104,33 @@ static Random rnd = new Random();
                 parking();
             }
         });
-
+        //disable the manager button for users that are not manager
+        man.setVisibility(ImageView.GONE);
         //user who manage the application
-        if (user_phone.equals("0526333")) {
-            isAdmin = true;
 
-        } else {
-            isAdmin = false;
-            //if you are not manager you cant go to admin session.
-            man.setVisibility(ImageView.GONE);
-        }
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
+        //create query in which the phones orders in in specific path.
+        Query checkUser = reference.orderByChild("user_phone").equalTo(user_phone);
+        //check if the user is exists.
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {//if the DB credentials exists please enter the data base and do the series commands.
+                    isAdmin = (Boolean) snapshot.child(user_phone).child("isAdmin").getValue();
+                    //buffer wait to retrieve data from data base.
+                    if (isAdmin) {
+                        //if you are manager you cant go to admin session.
+                        man.setVisibility(ImageView.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         chatSu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,8 +164,8 @@ static Random rnd = new Random();
 
     public void parking() {
         Intent intent = new Intent(this, Parking.class);
-        intent.putExtra("user_name",user_name);
-        intent.putExtra("user_phone",user_phone);
+        intent.putExtra("user_name", user_name);
+        intent.putExtra("user_phone", user_phone);
         startActivity(intent);
     }
 

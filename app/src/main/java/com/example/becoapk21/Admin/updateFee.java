@@ -27,6 +27,9 @@ public class updateFee extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //hide name of intent
+        getSupportActionBar().hide();
+
         setContentView(R.layout.activity_update_fee);
         updateFeeButton = (Button) findViewById(R.id.updateFeeButton1);
         editFee = (EditText) findViewById(R.id.editFee);

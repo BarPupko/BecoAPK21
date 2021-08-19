@@ -56,7 +56,7 @@ import java.util.Date;
         //status bar color
         mEditText = (TextView) findViewById(R.id.editText);
         getWindow().setStatusBarColor(ContextCompat.getColor(Users.this, R.color.beco));
-        //
+        //hide name of intent
         getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);

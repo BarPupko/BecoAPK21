@@ -110,8 +110,6 @@ public class GetTheBike extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //משיכת של נתון כמה עולה לדקה לשמור את האופניים
                  parkingFee = Double.parseDouble(snapshot.child("parkingFeePerMinute").getValue().toString());
-
-
             }
 
             @Override

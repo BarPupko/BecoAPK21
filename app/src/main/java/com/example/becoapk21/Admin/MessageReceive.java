@@ -67,7 +67,7 @@ public class MessageReceive extends AppCompatActivity {
                         for (int i = 0; i < count; i++) {
                                 //display the messages that are not null and not empty.
                             if (user_array[i].getMessage()!=null && !user_array[i].getMessage().equals("")) {
-                                mLayout.addView(createNewTextView(user_array[i].messageString(), i,user_array[i].getMessageType()));
+                                mLayout.addView(createNewTextView(user_array[i].messageString(), count_user_message,user_array[i].getMessageType()));
                                 count_user_message++; // count messages.
                             }
                         }
@@ -130,6 +130,7 @@ public class MessageReceive extends AppCompatActivity {
         deleteButton.setVisibility(View.GONE);
         //locate the value that need to be reset inside the database.
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("users").child(user_phone).child("message");
+
         dbNode.setValue("");//set default value inside the db into --> "" --> (means empty and not NULL)
 
 

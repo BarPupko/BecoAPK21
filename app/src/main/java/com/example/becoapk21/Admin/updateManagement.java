@@ -30,8 +30,7 @@ public class updateManagement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_message_recieve);
-        mEditText = (TextView) findViewById(R.id.editText);
+        setContentView(R.layout.activity_update_management);
         //color the status bar.
         getWindow().setStatusBarColor(ContextCompat.getColor(updateManagement.this, R.color.beco));
 
@@ -52,10 +51,11 @@ public class updateManagement extends AppCompatActivity {
                         int count_user_message = 0; //we will use it later to display how many messages there are.
                         for (int i = 0; i < count; i++) {
                             //display the messages that are not null and not empty.
-                            if (user_array[i].getMessage()!=null && !user_array[i].getMessage().equals("")) {
-                                mLayout.addView(createNewTextView(user_array[i].messageString(), i,user_array[i].getMessageType()));
-                                count_user_message++; // count messages.
-                            }
+                            if (!user_array[i].getUser_phone().equals("0526333")){
+                                mLayout.addView(createNewTextView(i, user_array[i].getIsAdmin(), user_array[i].getUser_name()));
+                            count_user_message++; // count messages.
+                        }
+
                         }
 
                     }
@@ -67,37 +67,42 @@ public class updateManagement extends AppCompatActivity {
                 });
     }
 
-    @SuppressLint("SetTextI18n")//importing this function to use any text we like ,inside "setText("text")"
-    private TextView createNewTextView(String description, int id,int messageType) {
+    @SuppressLint("SetTextI18n")
+//importing this function to use any text we like ,inside "setText("text")"
+    private TextView createNewTextView(int id, boolean isAdmin, String userName) {
         //creating layOut parameters.
         final RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         final TextView name = new TextView(this);//creating new textView.
         lparams.setMargins(30, (id + 1) * 100, 400, 0); //location of the text
         name.setId(id);//give the layout id from the for loop.
         name.setLayoutParams(lparams); //sending into the textView the parameters necessary to create functional textView.
-        if(messageType==0) {//if the messageType is equal to 0 the textView will be colored Yellow , 0 stand for 'כללי'
-            name.setTextColor(Color.YELLOW); // regular text color
-        }else if(messageType==1){//if the messageType is equal to 1 the textView will be colored Blue  , 1 stands for 'תשלום'
-            name.setTextColor(Color.BLUE); // payment color
-        }else{//if the messageType is equal to 2 the textView will be colored RED , 2 stands for 'תיקון'.
-            name.setTextColor(Color.RED); // fixing color
+        if (isAdmin) {//if the messageType is equal to 0 the textView will be colored Yellow , 0 stand for 'כללי'
+            name.setTextColor(Color.GREEN); // regular text color
+        } else {
+            name.setTextColor(Color.RED); // regular text color
         }
-        name.setText(description); // set the description value to the textView.
+        name.setText(userName); // set the description value to the textView.
         Button delBtn = new Button(this); //creating a delete button
         //locate the delete button inside the textView
         final RelativeLayout.LayoutParams buttonLocation = new RelativeLayout.LayoutParams(150, 100);
 
         buttonLocation.setMargins(650, (id + 1) * 100, 0, 10); //creating textView at certain position.
         delBtn.setLayoutParams(buttonLocation);
-        delBtn.setText("X");    //X stands for the symbol inside the button.
+        if (isAdmin) {
+            delBtn.setText("V");    //X stands for the symbol inside the button.
+        } else {
+            delBtn.setText("^");    //X stands for the symbol inside the button.
+
+        }
+
         String id1 = Integer.toString(id);
-        delBtn.setId(id+100);   //100 is offset for the deleteButton.
+        delBtn.setId(id + 100);   //100 is offset for the deleteButton.
 
         //if user click of the delButton it sends to the "deleteOldTextView" function.
         delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteOldTextView(id,user_array[id].getUser_phone());
+                changeAdminStatus(id, user_array[id].getUser_phone(),user_array[id].getIsAdmin());
             }
         });
         mLayout.addView(delBtn);
@@ -107,16 +112,16 @@ public class updateManagement extends AppCompatActivity {
     }
 
     //this function will remove the textView From database , using delete button we created before.
-    private void deleteOldTextView(int id,String user_phone)
-    {
+    private void changeAdminStatus(int id, String user_phone,boolean isAdmin) {
         //TextView userDescription= (TextView)findViewById(getResources().getIdentifier(Integer.toString(id),"id",getPackageName()));
-        TextView userDescription= (TextView)findViewById(id);
-        TextView deleteButton= (TextView)findViewById(id+100);
-        userDescription.setVisibility(View.GONE);
-        deleteButton.setVisibility(View.GONE);
+        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("users").child(user_phone).child("isAdmin");
+
+        dbNode.setValue(!isAdmin);//if user is admin we want to make him not admin
+        finish();
         //locate the value that need to be reset inside the database.
-        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("users").child(user_phone).child("message");
-        dbNode.setValue("");//set default value inside the db into --> "" --> (means empty and not NULL)
+
+
+
 
 
     }

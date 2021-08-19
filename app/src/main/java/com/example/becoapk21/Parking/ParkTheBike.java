@@ -39,31 +39,31 @@ public class ParkTheBike extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
 
-        current_spot = 0;
-        getSupportActionBar().hide();
-        getWindow().setStatusBarColor(ContextCompat.getColor(ParkTheBike.this, R.color.beco));
-        //
+        current_spot = 0;//current spot starting from 0
+        getSupportActionBar().hide();//hide intent title.
+        getWindow().setStatusBarColor(ContextCompat.getColor(ParkTheBike.this, R.color.beco));//status color
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_park_the_bike);
-        addBike = (Button) findViewById(R.id.accept);
-        Intent intent = getIntent();
+        addBike = (Button) findViewById(R.id.accept);//btn to add new bike
+        Intent intent = getIntent();//return the intent that start the activity
         user_phone = intent.getStringExtra("user_phone");
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        parkingTime = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");//date formate
+        parkingTime = new Date();//new object of Date
         parkingSpotLetter = 'A'; //default value for letter
         parked_user = ""; //default value for user name
         //Generate a parking
 
- //generate parking spot in accordance to what is free
+
+        //generate parking spot in accordance to what is free
        FirebaseDatabase.getInstance().getReference().child("parked")
                .addListenerForSingleValueEvent(new ValueEventListener() {
                    @Override
                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                           ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);
-                            parking_spot_letters[current_spot] = (char)user.getParkingSpot();
-                            parking_spot_digits[current_spot++] = user.getParkingDigit();
+                           ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);//get arguments from ParkingHelperClass
+                            parking_spot_letters[current_spot] = (char)user.getParkingSpot();//parking_spot_letters array receive new arguments.
+                            parking_spot_digits[current_spot++] = user.getParkingDigit();//parking_spot_digits array receive new arguments.
                             parked_user=intent.getStringExtra("user_name");
                             //!!!!!פונקציה קודמת למציאת והכנסת אופניים פנויים!!!!!
 

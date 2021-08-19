@@ -9,6 +9,7 @@ package com.example.becoapk21.Login_Register;
 public class UserHelperClass {
     //Attributes
     private String user_name, user_password, user_email, user_phone, parkingSpot, message;
+    private boolean isAdmin;
     int messageType;
 
 
@@ -18,14 +19,15 @@ public class UserHelperClass {
     }
 
     //constructor
-    public UserHelperClass(String user_name, String user_password, String user_email, String user_phone, String parkingSpot,String message,int messageType) {
+    public UserHelperClass(String user_name, String user_password, String user_email, String user_phone, String parkingSpot, String message, int messageType, boolean isAdmin) {
         this.user_name = user_name; // user name
         this.user_password = user_password; // user password
         this.user_email = user_email; // email user entered
         this.user_phone = user_phone; //phone number from the user
         this.parkingSpot = parkingSpot; // parking spot the user parked the bike
-        this.messageType= messageType; //0 -> כללי 1-> תשלום 2-> תיקון
-        this.message=""; //staring message from empty
+        this.messageType = messageType; //0 -> כללי 1-> תשלום 2-> תיקון
+        this.isAdmin = false;
+        this.message = ""; //staring message from empty
     }
 
     //methods
@@ -85,10 +87,13 @@ public class UserHelperClass {
         this.message = message;
     }
 
+    public boolean isAdmin() { return isAdmin; }
+
+    public void setAdmin(boolean isAdmin) { this.isAdmin = isAdmin; }
 
     //ToString
-    public String messageString(){
-        return this.getUser_name()+" "+this.getUser_phone()+" \n"+this.getMessage();
+    public String messageString() {
+        return this.getUser_name() + " " + this.getUser_phone() + " \n" + this.getMessage();
 
     }
 }

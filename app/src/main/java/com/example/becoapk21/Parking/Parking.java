@@ -111,7 +111,7 @@ public class Parking extends AppCompatActivity {
             }
         });
 
-
+        //OnClick when user try to retrieve bike
         getTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,7 +123,7 @@ public class Parking extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
-                            Intent i = new Intent(getApplication(),GetTheBike.class);
+                            Intent i = new Intent(getApplication(),GetTheBike.class);//moving the arguments from one intent to another using putExtra
                             i.putExtra("user_phone",user_phone);
                             i.putExtra("user_name",user_name);
                             startActivity(i);

@@ -10,7 +10,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.provider.ContactsContract;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +38,7 @@ import org.json.JSONException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 /*
                       GetTheBike.java ---> INFORMATION
             ------------------------------------------------------------
@@ -47,7 +50,9 @@ import java.util.Date;
             database will be removed.
             -------------------------------------------------------------
  */
+
 public class GetTheBike extends AppCompatActivity {
+
 
 
     String user_phone;
@@ -60,7 +65,7 @@ public class GetTheBike extends AppCompatActivity {
     Date currentDate;
     double timeParked;
     double amount_to_pay;
-    double parkingFee = 5;
+    double parkingFee = 55;//10 אג' לדקה
     double conversion = 1000 * 60 * 60;
 
 
@@ -87,7 +92,33 @@ public class GetTheBike extends AppCompatActivity {
         Intent intent = getIntent();
         user_phone = intent.getStringExtra("user_phone");
 
+        //after 30 second this activity will start , and return us to the previous Intent.
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                new Runnable() {
+                    public void run() {
+                        finish();
+                    }
+                },
+                30000);
+
+        //////////////////////////////////////////////////////////////////////
+
         FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
+        DatabaseReference admin_ref = users_instance.getReference("admin");
+        admin_ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                //משיכת של נתון כמה עולה לדקה לשמור את האופניים
+                 parkingFee = Double.parseDouble(snapshot.child("parkingFeePerMinute").getValue().toString());
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         DatabaseReference parking_ref = users_instance.getReference("parked");
         Query checkUser = parking_ref.orderByKey().equalTo(user_phone);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -97,19 +128,22 @@ public class GetTheBike extends AppCompatActivity {
                 if (snapshot.exists()) {
 
                     ParkingHelperClass user = snapshot.child(user_phone).getValue(ParkingHelperClass.class);
-                   // time = (Long) snapshot.child(user_phone).child("parkingTime").child("time").getValue();
-                   // currentDate = new Date();
+                    // time = (Long) snapshot.child(user_phone).child("parkingTime").child("time").getValue();
+                    // currentDate = new Date();
                     //timeParked = (double) currentDate.getTime() - time;
-                   // amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers
-                   // amountToPay.setText(Double.toString(amount_to_pay) + " ש''ח ");
-                    amount_to_pay=user.calculateFee();
-                   amountToPay.setText(Double.toString(amount_to_pay)+"שח");
+                    // amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers
+                    // amountToPay.setText(Double.toString(amount_to_pay) + " ש''ח ");
+                    user.setParkingFee(parkingFee);//update parkingFee from database
+                    amount_to_pay = user.calculateFee();
+                    amountToPay.setText(Double.toString(amount_to_pay) + "שח");
+                    Toast.makeText(GetTheBike.this, Double.toString(parkingFee), Toast.LENGTH_SHORT).show();
+
 
                     //get the parkingSpot
-                   // parking =  (char)Math.toIntExact((long)snapshot.child(user_phone).child("parkingSpot").getValue());
-                   // parkingDigit =  Math.toIntExact((long)snapshot.child(user_phone).child("parkingDigit").getValue());
+                    // parking =  (char)Math.toIntExact((long)snapshot.child(user_phone).child("parkingSpot").getValue());
+                    // parkingDigit =  Math.toIntExact((long)snapshot.child(user_phone).child("parkingDigit").getValue());
                     //parkingSpotString=parking+""+parkingDigit;
-                   parkingSpot.setText(user.getFullParkingSpot());
+                    parkingSpot.setText(user.getFullParkingSpot());
 
 
                 } else {
@@ -134,6 +168,8 @@ public class GetTheBike extends AppCompatActivity {
         payment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 processPayment();
             }
 
@@ -160,26 +196,36 @@ public class GetTheBike extends AppCompatActivity {
                         //delete entry for phone number on successful payment
 
                         //delete node
-                        startActivity(new Intent(this,GetTheBike.class)
+                        startActivity(new Intent(this, GetTheBike.class)
                                 .putExtra("PaymentDetails", paymentDetails)
                                 .putExtra("PaymentAmount", amount_to_pay)
                         );
 
                     } catch (JSONException e) {
                         e.printStackTrace();
+
                     }
                 }
             } else if (resultCode == Activity.RESULT_CANCELED) {
                 //delete parked entry for phone number
+
                 DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("parked").child(user_phone);
-              //  dbNode.setValue(null);//מחיקה במידה ונצטרך בעת ביטול
+                //  dbNode.setValue(null);//מחיקה במידה ונצטרך בעת ביטול
                 Toast.makeText(this, "פעולת תשלום , בוטלה.", Toast.LENGTH_SHORT).show();
             } else if (resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
                 Toast.makeText(this, "אין מספיק כסף בחשבון.", Toast.LENGTH_LONG).show();
         }
     }
 
+
+    //moving to payment intent.
     private void processPayment() {
+
+
+
+
+
+
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(amount_to_pay), "ILS",//Paypal showing the currency user need to pay
                 "Pay for parking", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(this, PaymentActivity.class);

@@ -113,7 +113,7 @@ public class Register extends AppCompatActivity {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if(!snapshot.exists()){
-                                        UserHelperClass helperClass = new UserHelperClass(fname1, password, email, phoneNum, "A1","",0);
+                                        UserHelperClass helperClass = new UserHelperClass(fname1, password, email, phoneNum, "A1","",0,false);
                                         users_ref.child(phoneNum).setValue(helperClass);
                                         Toast.makeText(Register.this, "המשתמש נוצר", Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), Login.class);

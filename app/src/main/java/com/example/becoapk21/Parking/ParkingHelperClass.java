@@ -1,6 +1,7 @@
 package com.example.becoapk21.Parking;
 
 import android.annotation.SuppressLint;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.util.Date;
@@ -21,11 +22,16 @@ public class ParkingHelperClass {
     String parked_name;
     Long time;
     Date currentDate;
+
+    public void setParkingFee(double parkingFee) {
+        this.parkingFee = parkingFee;
+    }
+
     String user_phone;
     double timeParked;
     double amount_to_pay;
     double parkingFee = 5;
-    double conversion = 1000 * 60 * 60;
+    double conversion = 1000 * 60 * 60;//1000 stands for miliseconds * 60 (convert to second) *60 (convert to min)
     StringBuilder sb = new StringBuilder();
     Formatter formatter=new Formatter(sb, Locale.US);
 
@@ -77,8 +83,10 @@ public class ParkingHelperClass {
         time=this.getParkingTime().getTime();
         currentDate = new Date();
         timeParked = (double) currentDate.getTime() - time;
-        amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers
-        return amount_to_pay;
+        System.out.println(parkingFee);
+        amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers parkingFee * 100 / 100.
+       return amount_to_pay;
+
     }
 
     //Create method String parkingSpot() returns parking spot of the user (connect parkingChar and parkingDigit)

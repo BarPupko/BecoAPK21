@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setStatusBarColor(ContextCompat.getColor(Login.this, R.color.beco));
-//        getWindow().setNavigationBarColor(ContextCompat.getColor(Login.this, R.color.beco));
+        // getWindow().setNavigationBarColor(ContextCompat.getColor(Login.this, R.color.beco));
         //status bar color
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();

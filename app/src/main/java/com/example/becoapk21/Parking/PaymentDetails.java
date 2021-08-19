@@ -26,13 +26,13 @@ public class PaymentDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment_details);
 
-        txtId = (TextView)findViewById(R.id.txtId);
-        txtAmount=(TextView)findViewById(R.id.textAmount);
-        txtStatus=(TextView)findViewById(R.id.txtStatus);
+        txtId = (TextView)findViewById(R.id.txtId);         //TextView for userID.
+        txtAmount=(TextView)findViewById(R.id.textAmount);  //TextView saying how many he need to pay.
+        txtStatus=(TextView)findViewById(R.id.txtStatus);   //TextView displaying the amount he need to pay.
 
         //Get intent
         Intent intent = getIntent();
-
+        //try and catch to get the data from database , if the data not return(catch) it will display null.
         try{
             JSONObject jsonObject = new JSONObject(intent.getStringExtra("PaymentDetails"));
             showDetails(jsonObject.getJSONObject("response"),intent.getStringExtra("PaymentAmount"));
@@ -40,7 +40,7 @@ public class PaymentDetails extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+        //showing of the screen the details it receive from the DataBase
     private void showDetails(JSONObject response, String paymentAmount) {
         try {
             txtId.setText(response.getString("id"));

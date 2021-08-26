@@ -13,9 +13,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.becoapk21.Activities.WelcomeSession;
+import com.example.becoapk21.ForgotPassword.CodeVerfication;
+import com.example.becoapk21.ForgotPassword.ForgetPassword;
 import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
@@ -39,6 +42,7 @@ public class Login extends AppCompatActivity {
     ImageView parkingLocator;//variables store all the parking location.
     ImageView contact; //contact button that will be redirect to Help.java.
     String passfromDB; // recieveing the password from the database to check if is matches the password was entered in EditText.
+      TextView forgotPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,8 @@ public class Login extends AppCompatActivity {
         regPassword = (EditText) findViewById(R.id.AddPassword);
         contact=(ImageView)findViewById(R.id.contact2);
         parkingLocator=(ImageView)findViewById(R.id.parkingLocator1);
+        forgotPass=(TextView)findViewById(R.id.forgotPasswordLogin);
+
 
 
 
@@ -88,7 +94,7 @@ public class Login extends AppCompatActivity {
                     return;
                 }
 
-                if(user_phone.length() != 7){//change later to 10 digits
+                if(user_phone.length() != 10){//change later to 10 digits
                     regPhoneNumber.setError("יש להזין מספר טלפון בעל 10 ספרות");
                     return;
                 }
@@ -98,10 +104,7 @@ public class Login extends AppCompatActivity {
                     regPassword.setError("יש להזין סיסמא");
                     return;
                 }
-                if(password.length() <6){
-                    regPassword.setError("יש להזין סיסמא נכונה הכוללת לפחות 6 תווים");
-                    return;
-                }
+
 
                 //connect into firebase and enter users DB
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
@@ -125,7 +128,7 @@ public class Login extends AppCompatActivity {
                             else{
                                 System.out.println("else");
                                 //showing password for the user that connected
-//                                Toast.makeText(Login.this, passfromDB, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Login.this, passfromDB, Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -146,9 +149,18 @@ public class Login extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent Intent = new Intent(getApplicationContext() , ForgetPassword.class);
+                startActivity(Intent);
+            }
+        });
 
 
     }
+
+
 
     //move to register intent.
     public void registerNewMember() {

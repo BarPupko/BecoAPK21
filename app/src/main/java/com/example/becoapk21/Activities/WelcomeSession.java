@@ -44,7 +44,6 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
     static Random rnd = new Random();
 
     private ImageView parking;//park Bicycle
-    FirebaseAuth fAuth;
     TextView fullName;
     ImageView map;
     ImageView fix;
@@ -77,7 +76,6 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
 
         fullName = (TextView) findViewById(R.id.fullName2);
 
-        fAuth = FirebaseAuth.getInstance();
         random_number = rnd.nextInt(2);
         man = (ImageView) findViewById(R.id.man);
         parking = (ImageView) findViewById(R.id.parking);

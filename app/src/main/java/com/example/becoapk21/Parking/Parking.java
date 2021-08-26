@@ -32,10 +32,6 @@ import com.google.firebase.storage.StorageReference;
  */
 public class Parking extends AppCompatActivity {
 
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
-    StorageReference storageReference;
-    String userId;
     TextView fullName;
     ImageView getTheBike;
     ImageView parkTheBike;

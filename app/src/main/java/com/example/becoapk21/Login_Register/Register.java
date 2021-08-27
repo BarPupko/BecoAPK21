@@ -29,9 +29,12 @@ import com.example.becoapk21.Activities.WelcomeSession;
 import com.example.becoapk21.Admin.Help;
 import com.example.becoapk21.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -131,7 +134,19 @@ public class Register extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if(task.isSuccessful()){
-                                    UserHelperClass helperClass = new UserHelperClass(fname1, password, email, phoneNum, "A1", "", 0, false);
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Toast.makeText(Register.this, "נשלח אימייל לאימות המשתמש", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(Register.this, "אירעה שגיאה נסה שנית", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    UserHelperClass helperClass = new UserHelperClass(fname1, email, phoneNum, "A1", "", 0, false);
                                     FirebaseDatabase.getInstance().getReference("users").child(phoneNum)
                                     .setValue(helperClass).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

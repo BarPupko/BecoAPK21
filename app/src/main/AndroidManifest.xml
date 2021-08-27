@@ -16,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BecoAPK21">
-        <activity android:name=".ForgotPassword.ResetPassword"></activity>
         <activity android:name=".ForgotPassword.CodeVerfication" />
         <activity android:name=".ForgotPassword.ForgetPassword" />
         <activity android:name=".Admin.updateManagement" />

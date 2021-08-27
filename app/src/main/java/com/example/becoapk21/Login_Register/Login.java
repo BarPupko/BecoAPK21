@@ -22,6 +22,10 @@ import com.example.becoapk21.ForgotPassword.ForgetPassword;
 import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +47,8 @@ public class Login extends AppCompatActivity {
     ImageView contact; //contact button that will be redirect to Help.java.
     String passfromDB; // recieveing the password from the database to check if is matches the password was entered in EditText.
       TextView forgotPass;
-
+      String emailfromDB;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setStatusBarColor(ContextCompat.getColor(Login.this, R.color.beco));
@@ -59,7 +64,8 @@ public class Login extends AppCompatActivity {
         contact=(ImageView)findViewById(R.id.contact2);
         parkingLocator=(ImageView)findViewById(R.id.parkingLocator1);
         forgotPass=(TextView)findViewById(R.id.forgotPasswordLogin);
-
+        regPhoneNumber.setText("0526333441");
+        regPassword.setText("Bar123Bar");
 
 
 
@@ -114,22 +120,30 @@ public class Login extends AppCompatActivity {
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if(snapshot.exists()){//if the DB credentials exists please enter the data base and do the series commands.
-                            passfromDB = snapshot.child(user_phone).child("user_password").getValue(String.class).trim();
-                            if(passfromDB.equals(password)){//check if the password match's the password received from the user in EditText.
+                        if(snapshot.exists()){//If phonenumber exists in DB
+                            emailfromDB = snapshot.child(user_phone).child("user_email").getValue(String.class).trim();//pull email from realtime DB to use in Auth
                             String user_name_fromDB = snapshot.child(user_phone).child("user_name").getValue(String.class).trim();//get the user_name from the phone_number we get.
-                            Intent intent = new Intent(getApplicationContext(), WelcomeSession.class);
-                            intent.putExtra("user_phone",user_phone);
-                            intent.putExtra("user_name",user_name_fromDB);
-                            //if login successful go to welcome session.
-                            startActivity(intent);//if it exists move to welcome Session intent
+                            //if login successful go to welcome session
+                            mAuth.signInWithEmailAndPassword(emailfromDB,password)
+                                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if(task.isSuccessful()){
+                                                Intent intent = new Intent(getApplicationContext(), WelcomeSession.class);
+                                                intent.putExtra("user_phone",user_phone);
+                                                intent.putExtra("user_name",user_name_fromDB);
+                                                intent.putExtra("user_email",emailfromDB);
+                                                startActivity(intent);//if it exists move to welcome Session intent
+                                            }
+                                            else{
+                                                Toast.makeText(Login.this, "אחד מהנתונים שהכנסת שגוי", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
 
-                            }
-                            else{
-                                System.out.println("else");
-                                //showing password for the user that connected
-                                Toast.makeText(Login.this, passfromDB, Toast.LENGTH_SHORT).show();
-                            }
+
+
+
                         }
 
                     }

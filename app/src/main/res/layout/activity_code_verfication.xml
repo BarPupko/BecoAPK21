@@ -10,38 +10,27 @@
 
     <TextView
         android:id="@+id/textView30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Code Verfication"
+        android:layout_width="150dp"
+        android:layout_height="91dp"
+        android:text="Verify Email"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
-
-
-    <EditText
-        android:id="@+id/codeFromUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="enter Code Verfication"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.288" />
+        app:layout_constraintVertical_bias="0.323" />
 
     <Button
+        android:id="@+id/sendEmailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verify"
+        android:text="Send Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.469"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.436" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

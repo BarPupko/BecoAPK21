@@ -8,20 +8,17 @@ package com.example.becoapk21.Login_Register;
  */
 public class UserHelperClass {
     //Attributes
-    private String user_name, user_password, user_email, user_phone, parkingSpot, message;
+    private String user_name,user_email, user_phone, parkingSpot, message;
     private boolean isAdmin;
     int messageType;
 
-
-    //constructor
+    //constructor - must create empty constructor
     public UserHelperClass() {
 
     }
-
     //constructor
-    public UserHelperClass(String user_name, String user_password, String user_email, String user_phone, String parkingSpot, String message, int messageType, boolean isAdmin) {
+    public UserHelperClass(String user_name,String user_email, String user_phone, String parkingSpot, String message, int messageType, boolean isAdmin) {
         this.user_name = user_name; // user name
-        this.user_password = user_password; // user password
         this.user_email = user_email; // email user entered
         this.user_phone = user_phone; //phone number from the user
         this.parkingSpot = parkingSpot; // parking spot the user parked the bike
@@ -45,14 +42,6 @@ public class UserHelperClass {
 
     public void setUser_name(String user_name) {
         this.user_name = user_name;
-    }
-
-    public String getUser_password() {
-        return user_password;
-    }
-
-    public void setUser_password(String user_password) {
-        this.user_password = user_password;
     }
 
     public String getUser_email() {

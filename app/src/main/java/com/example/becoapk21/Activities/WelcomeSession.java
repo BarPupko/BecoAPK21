@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,13 +17,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.becoapk21.Admin.ManagerControl;
+import com.example.becoapk21.ForgotPassword.CodeVerfication;
 import com.example.becoapk21.Navigation.RoadMap;
 import com.example.becoapk21.Parking.FixBike;
 import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.Parking.Parking;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,11 +55,16 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
     ImageView man;
     ImageView chatSu;
     TextView didYouKnowText;
+    TextView verifyMsg;
+    Button verifyEmail;
     int random_number;
     boolean isAdmin = false;
     String user_phone;
     String user_name;
-
+    FirebaseAuth fAuth;
+    String userId;
+    String user_email;
+    boolean useremailveri;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
@@ -62,31 +72,47 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_session);
         getSupportActionBar().hide();
-
         //Get data from calling intent
         Intent intent = getIntent();
         user_phone = intent.getStringExtra("user_phone");
         user_name = intent.getStringExtra("user_name");
-//        Toast.makeText(WelcomeSession.this, user_phone, Toast.LENGTH_SHORT).show();
-        //Get data from calling intent
         chatSu = (ImageView) findViewById(R.id.chatSupport);
         fix = (ImageView) findViewById(R.id.fix1);
         map = (ImageView) findViewById(R.id.map);
         didYouKnowText = (TextView) findViewById(R.id.didYouKnowNote);
-
+        verifyMsg = (TextView) findViewById(R.id.isEmailVerified);
+        verifyEmail = (Button) findViewById(R.id.verifyEmailButton);
         fullName = (TextView) findViewById(R.id.fullName2);
-
         random_number = rnd.nextInt(2);
         man = (ImageView) findViewById(R.id.man);
         parking = (ImageView) findViewById(R.id.parking);
-
         //Random Message display into the screen.
         String[] arr = {
                 "רכיבה על אופניים מגבירה את הריכוז וממריצה את המוח.", "הרכיבה מעודדת ירידה במשקל וטובה ללב"
                 , "לאכול שווארמה טעים אבל לא בהכרח בריא"};
         didYouKnowText.setText(arr[random_number]);
-
-
+        fAuth =FirebaseAuth.getInstance();
+        userId = fAuth.getCurrentUser().getUid();
+        FirebaseUser user = fAuth.getCurrentUser();
+        useremailveri = user.isEmailVerified();
+        if(!useremailveri){
+          verifyMsg.setVisibility(View.VISIBLE);
+          verifyEmail.setVisibility(View.VISIBLE);
+            verifyMsg.setText("לא אישרת את כתובת המייל שלך!");
+        }
+        else{
+           Toast.makeText(WelcomeSession.this, "2", Toast.LENGTH_SHORT).show();
+        }
+        verifyEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplication(), CodeVerfication.class);
+                i.putExtra("user_email",user_email);
+                i.putExtra("user_phone",user_phone);
+                i.putExtra("verifyType","email_verify");
+                startActivity(i);
+            }
+        });
         fix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +120,8 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
 
         fullName.setText(user_name);
         parking.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +143,7 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {//if the DB credentials exists please enter the data base and do the series commands.
                     isAdmin = (Boolean) snapshot.child(user_phone).child("isAdmin").getValue();
+                    user_email = (String)snapshot.child(user_phone).child("user_email").getValue();
                     //buffer wait to retrieve data from data base.
                     if (isAdmin) {
                         //if you are manager you cant go to admin session.

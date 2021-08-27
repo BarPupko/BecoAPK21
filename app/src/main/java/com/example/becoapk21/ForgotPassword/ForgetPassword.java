@@ -4,53 +4,44 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 
-import com.example.becoapk21.Navigation.CarmelRoad;
-import com.example.becoapk21.Parking.GetTheBike;
-import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.R;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ForgetPassword extends AppCompatActivity {
 
     Button nextBtn;
-    EditText getPhoneNum;
-    String phoneNum;
-
+    EditText getEmail;
+    String user_email;
+    EditText getPhone;
+    String user_phone;
+    String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
-
+        type = "reset_password";
         nextBtn = (Button) findViewById(R.id.nextButton);
-        getPhoneNum = (EditText) findViewById(R.id.getPhoneNumber);
+        getEmail = (EditText) findViewById(R.id.getEmail);
+        getPhone = (EditText) findViewById(R.id.getPhoneNumber);
         nextBtn.setOnClickListener(new View.OnClickListener() {
             //Auth
             @Override
             public void onClick(View v) {
                 //
-                phoneNum = getPhoneNum.getText().toString();
-                if (phoneNum.length() != 10) {
-                    getPhoneNum.setError("מספר הטלפון צריך להיות בעל 10 ספרות");
+                user_email = getEmail.getText().toString();
+                user_phone = getPhone.getText().toString();
+                if(!Patterns.EMAIL_ADDRESS.matcher(user_email).matches()){
+                    getEmail.setError("הכנס אימייל תקין");
                     return;
-                }
-                if (phoneNum.charAt(0) != '0' || phoneNum.charAt(1) != '5') {
-                    getPhoneNum.setError("מספר הטלפון צריך להתחיל ב05 וספרה נוספת");
-                    return;
-                }
-                for (int i = 0; i < 8; i++) {
-                    if (phoneNum.charAt(i) < '0' || phoneNum.charAt(i) > '9') {
-                        getPhoneNum.setError("ספרה לא תקינה במספר הטלפון");
-                        return;
-                    }
                 }
                 Intent Intent = new Intent(getApplicationContext() , CodeVerfication.class);
-                Intent.putExtra("user_phone", phoneNum);
+                Intent.putExtra("user_email", user_email);
+                Intent.putExtra("user_phone", user_phone);
+                Intent.putExtra("verifyType", type);
                 startActivity(Intent);
             }
 

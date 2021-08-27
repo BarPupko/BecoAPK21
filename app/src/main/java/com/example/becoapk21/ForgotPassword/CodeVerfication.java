@@ -47,9 +47,9 @@ public class CodeVerfication extends AppCompatActivity {
         Intent intent = getIntent();
         mAuth = FirebaseAuth.getInstance();
         sendEmailButton = (Button) findViewById(R.id.sendEmailButton);
-        phoneNum = intent.getStringExtra("user_phone");
-        user_email = intent.getStringExtra("user_email");
-        type = intent.getStringExtra("verifyType");
+        phoneNum = intent.getStringExtra("user_phone");//used to check correct email and phone
+        user_email = intent.getStringExtra("user_email");//email used to send the reset login
+        type = intent.getStringExtra("verifyType");//figuring what need to be done , if equal to 'reset password' then
         if(type!=null){
             Toast.makeText(CodeVerfication.this, type, Toast.LENGTH_SHORT).show();
         }

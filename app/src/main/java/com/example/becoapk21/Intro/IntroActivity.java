@@ -2,6 +2,7 @@ package com.example.becoapk21.Intro;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class IntroActivity extends AppCompatActivity {
 
-    private ViewPager screenPager;
+    private ViewPager2 screenPager;
     IntroViewPagerAdapter introViewPagerAdapter;
 
     @Override

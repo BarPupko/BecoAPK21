@@ -20,7 +20,6 @@
         <activity android:name=".ForgotPassword.ForgetPassword" />
         <activity android:name=".Admin.updateManagement" />
         <activity android:name=".Admin.updateFee" />
-        <activity android:name=".Intro.IntroActivity" />
         <activity android:name=".Parking.FixBike" />
         <activity android:name=".Admin.MessageReceive" />
         <!--
@@ -57,13 +56,15 @@
         <activity android:name=".Login_Register.Register" />
         <activity android:name=".Activities.WelcomeSession" />
         <activity android:name=".Login_Register.Login" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.MainActivity"/>
+         <activity android:name=".Intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+         </activity>
+
     </application>
 
 </manifest>

@@ -40,6 +40,7 @@ public class CodeVerfication extends AppCompatActivity {
     String type = "";
     Button sendEmailButton;
     FirebaseAuth mAuth;
+    String emailfromDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,24 +74,30 @@ public class CodeVerfication extends AppCompatActivity {
                         if (snapshot.exists()) {
                             //OTP
                             if(type.equals("reset_password")) {
-                                mAuth.sendPasswordResetEmail(user_email).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(CodeVerfication.this, "נשלח אימייל לאיפוס סיסמא", Toast.LENGTH_SHORT).show();
-                                        } else { // send password reset email was not succesful
-                                            Toast.makeText(CodeVerfication.this, "אירעה שגיאה נסה שנית", Toast.LENGTH_SHORT).show();
-                                        }
-                                        sendEmailButton.setEnabled(false);
-                                        Timer sendEmailDelay = new Timer();
-                                        sendEmailDelay.schedule(new TimerTask() {
-                                            @Override
-                                            public void run() {
-                                                sendEmailButton.setEnabled(true);
+                                emailfromDB = snapshot.child(phoneNum).child("user_email").getValue(String.class).trim();//get email related to phonenum user entered
+                                if(emailfromDB.equals(user_email)) {//if email from DB related to phonenum equal to email user entered send reset email.
+                                    mAuth.sendPasswordResetEmail(user_email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(CodeVerfication.this, "נשלח אימייל לאיפוס סיסמא", Toast.LENGTH_SHORT).show();
+                                            } else { // send password reset email was not succesful
+                                                Toast.makeText(CodeVerfication.this, "אירעה שגיאה נסה שנית", Toast.LENGTH_SHORT).show();
                                             }
-                                        }, 60000);
-                                    }
-                                });
+                                            sendEmailButton.setEnabled(false);
+                                            Timer sendEmailDelay = new Timer();
+                                            sendEmailDelay.schedule(new TimerTask() {
+                                                @Override
+                                                public void run() {
+                                                    sendEmailButton.setEnabled(true);
+                                                }
+                                            }, 60000);
+                                        }
+                                    });
+                                }
+                                else{//if email user enetred is different from the one in DB print error
+                                    Toast.makeText(CodeVerfication.this, "אירעה שגיאה נסה שנית", Toast.LENGTH_SHORT).show();
+                                }
                             }
                             else if(type.equals("email_verify")) {
                                 FirebaseUser user = mAuth.getCurrentUser();

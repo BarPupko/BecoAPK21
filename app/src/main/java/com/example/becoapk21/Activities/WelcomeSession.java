@@ -99,6 +99,8 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
           verifyMsg.setVisibility(View.VISIBLE);
           verifyEmail.setVisibility(View.VISIBLE);
             verifyMsg.setText("לא אישרת את כתובת המייל שלך!");
+
+
         }
         else{
            Toast.makeText(WelcomeSession.this, "2", Toast.LENGTH_SHORT).show();
@@ -127,7 +129,12 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
         parking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parking();
+                if(!useremailveri) {
+                    Toast.makeText(WelcomeSession.this, "בשביל לחנות יש לאשר תחילה את האימייל", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    parking();
+                }
             }
         });
         //disable the manager button for users that are not manager

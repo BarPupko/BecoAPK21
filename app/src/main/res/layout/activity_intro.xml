@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Intro.IntroActivity">
 
-  <androidx.viewpager2.widget.ViewPager2
+  <androidx.viewpager.widget.ViewPager
       android:id="@+id/screen_viewpager"
       android:layout_width="407dp"
       android:layout_height="320dp"

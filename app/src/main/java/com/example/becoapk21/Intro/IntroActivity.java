@@ -2,7 +2,6 @@ package com.example.becoapk21.Intro;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class IntroActivity extends AppCompatActivity {
 
-    private ViewPager2 screenPager;
+    private ViewPager screenPager;
     IntroViewPagerAdapter introViewPagerAdapter;
 
     @Override
@@ -23,9 +22,9 @@ public class IntroActivity extends AppCompatActivity {
 
         //fill list screen
         List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("fresh food","",R.drawable.applogo));
-        mList.add(new ScreenItem("fast","",R.drawable.applogo));
-        mList.add(new ScreenItem("food","",R.drawable.applogo));
+        mList.add(new ScreenItem("fresh food","test",R.drawable.applogo));
+        mList.add(new ScreenItem("fast","test",R.drawable.applogo1));
+        mList.add(new ScreenItem("food","test",R.drawable.applogo2));
 
         //setup viewpager
         screenPager = findViewById(R.id.screen_viewpager);

@@ -55,10 +55,12 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
         getWindow().setStatusBarColor(ContextCompat.getColor(Register.this, R.color.design_default_color_background));
+        getSupportActionBar().hide();
+
         //
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        getSupportActionBar().hide();
         isPhoneExists = true;
         regEmail = (EditText) findViewById(R.id.EmailAddress);
         fname = (EditText) findViewById(R.id.userNameInput);

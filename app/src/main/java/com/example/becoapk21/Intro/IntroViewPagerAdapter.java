@@ -41,7 +41,6 @@ public class IntroViewPagerAdapter extends PagerAdapter {
         container.addView(layoutScreen);
 
         return layoutScreen;
-
     }
 
     @Override
@@ -58,4 +57,6 @@ public class IntroViewPagerAdapter extends PagerAdapter {
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View)object);
     }
+
+
 }

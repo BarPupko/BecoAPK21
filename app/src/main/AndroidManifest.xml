@@ -56,7 +56,8 @@
         <activity android:name=".Login_Register.Register" />
         <activity android:name=".Activities.WelcomeSession" />
         <activity android:name=".Login_Register.Login" />
-        <activity android:name=".Activities.MainActivity"/>
+
+                <!--        intro activity-->
          <activity android:name=".Intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,6 +65,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
          </activity>
+        <activity android:name=".Activities.MainActivity"/>
+
 
     </application>
 

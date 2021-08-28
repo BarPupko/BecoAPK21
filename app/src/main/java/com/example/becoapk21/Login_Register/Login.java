@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.becoapk21.Activities.WelcomeSession;
 import com.example.becoapk21.ForgotPassword.CodeVerfication;
 import com.example.becoapk21.ForgotPassword.ForgetPassword;
+import com.example.becoapk21.Intro.IntroActivity;
 import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
@@ -129,7 +130,7 @@ public class Login extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if(task.isSuccessful()){
-                                                Intent intent = new Intent(getApplicationContext(), WelcomeSession.class);
+                                                Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
                                                 intent.putExtra("user_phone",user_phone);
                                                 intent.putExtra("user_name",user_name_fromDB);
                                                 intent.putExtra("user_email",emailfromDB);

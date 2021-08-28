@@ -21,7 +21,7 @@ import com.example.becoapk21.R;
                 -------------------------------------------------------------
      */
     public class MainActivity extends AppCompatActivity {
-    private static int SPLASH_SCREEN = 2000; //2000milisec ==> 2 sec
+    private static int SPLASH_SCREEN = 3000; //2000milisec ==> 2 sec
 
 
     @Override

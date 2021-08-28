@@ -9,19 +9,21 @@
 
   <androidx.viewpager.widget.ViewPager
       android:id="@+id/screen_viewpager"
-      android:layout_width="407dp"
-      android:layout_height="320dp"
+      android:layout_width="397dp"
+      android:layout_height="408dp"
       android:layout_marginStart="3dp"
       android:layout_marginTop="97dp"
       android:layout_marginEnd="2dp"
       android:layout_marginBottom="237dp"
-      app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+      app:layout_constraintBottom_toTopOf="@+id/tab_indicator"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent" />
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.0" />
 
   <Button
-      android:id="@+id/button5"
+      android:id="@+id/btn_next"
       android:textColor="@color/black"
       android:backgroundTint="#fff"
       android:layout_width="wrap_content"
@@ -36,7 +38,8 @@
       app:layout_constraintVertical_bias="0.976" />
 
   <com.google.android.material.tabs.TabLayout
-      android:id="@+id/tabLayout"
+      app:tabBackground="@drawable/indicator_selector"
+      android:id="@+id/tab_indicator"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -46,19 +49,19 @@
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintVertical_bias="0.957">
 
-    <com.google.android.material.tabs.TabItem
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Monday" />
 
-    <com.google.android.material.tabs.TabItem
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tuesday" />
-
-    <com.google.android.material.tabs.TabItem
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wednesday" />
   </com.google.android.material.tabs.TabLayout>
+
+  <Button
+      android:id="@+id/btn_get_started"
+      android:layout_width="163dp"
+      android:layout_height="45dp"
+      android:backgroundTint="#2196F3"
+      android:text="Get Started"
+      android:visibility="invisible"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_bias="0.739" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,6 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BecoAPK21">
+
+
         <activity android:name=".ForgotPassword.CodeVerfication" />
         <activity android:name=".ForgotPassword.ForgetPassword" />
         <activity android:name=".Admin.updateManagement" />
@@ -54,19 +56,24 @@
         <activity android:name=".Navigation.RoadMap" />
         <activity android:name=".Parking.Parking" />
         <activity android:name=".Login_Register.Register" />
-        <activity android:name=".Activities.WelcomeSession" />
         <activity android:name=".Login_Register.Login" />
+        <activity android:name=".Activities.WelcomeSession" />
+        <activity android:name=".Activities.MainActivity">
+        <intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+            <action android:name="android.intent.action.MAIN" />
 
-                <!--        intro activity-->
-         <activity android:name=".Intro.IntroActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        </intent-filter>
+        </activity>
+        <!--        intro activity-->
+        <activity android:name=".Intro.IntroActivity">
+                <!--   <intent-filter>
+                        <category android:name="android.intent.category.LAUNCHER" />
+                        <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-         </activity>
-        <activity android:name=".Activities.MainActivity"/>
 
+                    </intent-filter> -->
+        </activity>
 
     </application>
 

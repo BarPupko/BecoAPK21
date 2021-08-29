@@ -45,7 +45,7 @@ public class IntroActivity extends AppCompatActivity {
         //when this activity is about to be launch , we need to check if its opened before or not
 
         if(restorePrefData()){
-            Intent mainActivity = new Intent(getApplicationContext(), MainActivity.class);
+            Intent mainActivity = new Intent(getApplicationContext(),WelcomeSession.class);
             startActivity(mainActivity);
             finish();
         }
@@ -66,9 +66,11 @@ public class IntroActivity extends AppCompatActivity {
 
         //fill list screen
         List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("welcome", "hello and welcome to beco", R.drawable.applogo));
-        mList.add(new ScreenItem("parking", "parking easy", R.drawable.applogo));
-        mList.add(new ScreenItem("send massages", "send massages", R.drawable.applogo));
+        mList.add(new ScreenItem("ברוכים הבאים", "ברוכים הבאים לחניון האופניים החכם", R.drawable.bicycle));
+        mList.add(new ScreenItem("חנייה", "באפליקציה זו תוכלו לחנות את האופניים בכל עת", R.drawable.putbikeontherail));
+        mList.add(new ScreenItem("מסלולים", "תוכלו למצוא מגוון מסלולים", R.drawable.colormap));
+        mList.add(new ScreenItem("אבטחה", "השירות מאובטח", R.drawable.applogo));
+        mList.add(new ScreenItem("שמחים שהצטרפתם", " ", R.drawable.applogo));
 
         //setup viewpager
         screenPager = findViewById(R.id.screen_viewpager);

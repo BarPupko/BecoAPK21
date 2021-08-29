@@ -40,8 +40,8 @@
 
     <TextView
         android:id="@+id/intro_title"
-        android:layout_width="175dp"
-        android:layout_height="72dp"
+        android:layout_width="299dp"
+        android:layout_height="57dp"
         android:text="TextView"
         android:textColor="@color/intro_title_color"
         android:textSize="32dp"

@@ -1,13 +1,9 @@
 package com.example.becoapk21.Parking;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import com.example.becoapk21.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 /*

@@ -1,13 +1,8 @@
 package com.example.becoapk21.Parking;
 
-import android.annotation.SuppressLint;
-import android.widget.Toast;
 
-import java.sql.Time;
 import java.util.Date;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Locale;
+
 /*
                        ParingHelperClass.java ---> INFORMATION
             ------------------------------------------------------------
@@ -27,27 +22,24 @@ public class ParkingHelperClass {
         this.parkingFee = parkingFee;
     }
 
-    String user_phone;
     double timeParked;
     double amount_to_pay;
     double parkingFee = 5;
     double conversion = 1000 * 60 * 60;//1000 stands for miliseconds * 60 (convert to second) *60 (convert to min)
     StringBuilder sb = new StringBuilder();
-    Formatter formatter=new Formatter(sb, Locale.US);
 
 
     public ParkingHelperClass() {
 
     }
 
-    public ParkingHelperClass(int parkingChar, Date parkingTime, int parkingDigit, String parked_name,String user_phone) {
+    public ParkingHelperClass(int parkingChar, Date parkingTime, int parkingDigit, String parked_name) {
         this.parkingChar = parkingChar;
         this.parkingTime = parkingTime;
         this.parkingDigit = parkingDigit;
         this.parked_name = parked_name;
-        this.user_phone = user_phone;
-    }
 
+    }
 
 
     public String getParked_name() {

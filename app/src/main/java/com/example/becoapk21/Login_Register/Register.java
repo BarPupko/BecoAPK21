@@ -1,20 +1,16 @@
-package com.example.becoapk21.Login_Register;
-
 
 /*
-                        Users.java ---> INFORMATION
+                        Register.java ---> INFORMATION
             ------------------------------------------------------------
-            this intent will present all the users that already parked
-            their bicycle , the amount they need to pay and the location
-            of the bike inside the parking.
-            we can unbound the bicycle from the parking by clicking on X.
+            this intent will present all the will present all the code
+            for register class
             -------------------------------------------------------------
  */
+package com.example.becoapk21.Login_Register;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,8 +20,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.example.becoapk21.Activities.WelcomeSession;
 import com.example.becoapk21.Admin.Help;
 import com.example.becoapk21.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,12 +29,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 
 public class Register extends AppCompatActivity {
@@ -56,8 +45,10 @@ public class Register extends AppCompatActivity {
         //status bar color
         getWindow().setStatusBarColor(ContextCompat.getColor(Register.this, R.color.design_default_color_background));
         getSupportActionBar().hide();
+        getWindow().setStatusBarColor(ContextCompat.getColor(Register.this, R.color.beco));
 
-        //
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);

@@ -10,9 +10,9 @@
 
     <TextView
         android:id="@+id/textView30"
-        android:layout_width="150dp"
-        android:layout_height="91dp"
-        android:text="Verify Email"
+        android:layout_width="241dp"
+        android:layout_height="86dp"
+        android:text="אימות דואר אלקטרוני"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,7 +25,7 @@
         android:id="@+id/sendEmailButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Email"
+        android:text="שלח אימייל"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,12 +2,10 @@ package com.example.becoapk21.Navigation;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.becoapk21.R;
 
 /*
@@ -19,10 +17,10 @@ import com.example.becoapk21.R;
             -------------------------------------------------------------
  */
 public class RoadMap extends AppCompatActivity {
-    TextView BlueRoad;
-    TextView GreenRoad;
-    TextView YellowRoad;
-    TextView PurpleRoad;
+    TextView blueRoad;
+    TextView greenRoad;
+    TextView yellowRoad;
+    TextView purpleRoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +31,12 @@ public class RoadMap extends AppCompatActivity {
         setContentView(R.layout.activity_road_map);
         getSupportActionBar().hide();
 
-        BlueRoad=(TextView)findViewById(R.id.batGalim);
-        GreenRoad=(TextView)findViewById(R.id.carmel);
-        YellowRoad=(TextView)findViewById(R.id.wadinisnas);
-        PurpleRoad=(TextView)findViewById(R.id.navepaz);
+        blueRoad =(TextView)findViewById(R.id.batGalim);
+        greenRoad =(TextView)findViewById(R.id.carmel);
+        yellowRoad =(TextView)findViewById(R.id.wadinisnas);
+        purpleRoad =(TextView)findViewById(R.id.navepaz);
 
-        BlueRoad.setOnClickListener(new View.OnClickListener() {
+        blueRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent Intent = new Intent(getApplicationContext() , BatGalim.class);
@@ -46,7 +44,7 @@ public class RoadMap extends AppCompatActivity {
             }
         });
 
-        GreenRoad.setOnClickListener(new View.OnClickListener() {
+        greenRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent Intent = new Intent(getApplicationContext() , CarmelRoad.class);
@@ -54,7 +52,7 @@ public class RoadMap extends AppCompatActivity {
             }
         });
 
-        YellowRoad.setOnClickListener(new View.OnClickListener() {
+        yellowRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent Intent = new Intent(getApplicationContext() , WadiNisnas.class);
@@ -62,7 +60,7 @@ public class RoadMap extends AppCompatActivity {
             }
         });
 
-        PurpleRoad.setOnClickListener(new View.OnClickListener() {
+        purpleRoad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent Intent = new Intent(getApplicationContext() , NevePaz.class);

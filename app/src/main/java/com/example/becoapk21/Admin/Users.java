@@ -1,9 +1,8 @@
- package com.example.becoapk21.Admin;
+package com.example.becoapk21.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.becoapk21.Activities.WelcomeSession;
 import com.example.becoapk21.Parking.Parking;
 import com.example.becoapk21.Parking.ParkingHelperClass;
@@ -39,18 +37,19 @@ import java.util.Date;
             -------------------------------------------------------------
  */
 
- public class Users extends AppCompatActivity {
-     Date currentDate;
-     Double amount_to_pay;
-     Double timeParked;
-     double parkingFee = 5;
-     double conversion = 1000 * 60 * 60;
+public class Users extends AppCompatActivity {
+    Date currentDate;
+    Double amount_to_pay;
+    Double timeParked;
+    double parkingFee = 5;
+    double conversion = 1000 * 60 * 60;
     private RelativeLayout mLayout;
     private Button delete;
     private TextView mEditText;
-    int count=0; //סופר כמה משתמשים יש
-    ParkingHelperClass [] user_array = new ParkingHelperClass[100];
+    int count = 0; //סופר כמה משתמשים יש
+    ParkingHelperClass[] user_array = new ParkingHelperClass[100];
     String[] user_phones = new String[100];// שומרים את המספרי טלפונים במערך בישביל לא ליצור חזרה על משתנים.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
@@ -66,17 +65,18 @@ import java.util.Date;
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);
-                            user_phones[count]=snapshot.getKey();
+                            user_phones[count] = snapshot.getKey();
                             user_array[count++] = user;
                         }
 
-                        mLayout = (RelativeLayout)findViewById(R.id.relativeLayout);
+                        mLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
 
-                        for(int i=0;i<count;i++){
-                            mLayout.addView(createNewTextView(user_array[i].toString(),i));
+                        for (int i = 0; i < count; i++) {
+                            mLayout.addView(createNewTextView(user_array[i].toString(), i));
                         }
 
                     }
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
@@ -88,7 +88,8 @@ import java.util.Date;
 
 
     ////////////////////*****PARKING AMOUNT TO PAY********/////////////////
-    @SuppressLint("SetTextI18n")//importing this function to use any text we like ,inside "setText("text")"
+    @SuppressLint("SetTextI18n")
+//importing this function to use any text we like ,inside "setText("text")"
     private TextView createNewTextView(String description, int id) {
         final RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         final TextView name = new TextView(this);
@@ -104,11 +105,11 @@ import java.util.Date;
         delBtn.setLayoutParams(buttonLocation);
         delBtn.setText("X");
         String id1 = Integer.toString(id);
-        delBtn.setId(id+100);//100 is offset for the deleteButton.
+        delBtn.setId(id + 100);//100 is offset for the deleteButton.
         delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteOldTextView(id,user_phones[id]);
+                deleteOldTextView(id, user_phones[id]);
             }
         });
         mLayout.addView(delBtn);
@@ -117,16 +118,15 @@ import java.util.Date;
         return name;
     }
 
-     private void deleteOldTextView(int id,String user_phone)
-     {
-         //TextView userDescription= (TextView)findViewById(getResources().getIdentifier(Integer.toString(id),"id",getPackageName()));
-         TextView userDescription= (TextView)findViewById(id);
-         TextView deleteButton= (TextView)findViewById(id+100);
-         userDescription.setVisibility(View.GONE);
-         deleteButton.setVisibility(View.GONE);
-         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("parked").child(user_phone);
-         dbNode.setValue(null);
+    private void deleteOldTextView(int id, String user_phone) {
+        //TextView userDescription= (TextView)findViewById(getResources().getIdentifier(Integer.toString(id),"id",getPackageName()));
+        TextView userDescription = (TextView) findViewById(id);
+        TextView deleteButton = (TextView) findViewById(id + 100);
+        userDescription.setVisibility(View.GONE);
+        deleteButton.setVisibility(View.GONE);
+        DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("parked").child(user_phone);
+        dbNode.setValue(null);
 
 
-     }
+    }
 }

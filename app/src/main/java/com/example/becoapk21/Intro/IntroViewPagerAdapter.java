@@ -6,12 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
-
 import com.example.becoapk21.R;
-
 import java.util.List;
 
 public class IntroViewPagerAdapter extends PagerAdapter {

@@ -21,7 +21,7 @@ public class NevePaz extends AppCompatActivity {
 
 
 
-    TextView Purple;
+    TextView purple;
 
 
     @Override
@@ -32,11 +32,11 @@ public class NevePaz extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_neve_paz);
         getSupportActionBar().hide();
-        Purple = (TextView) findViewById(R.id.goToPurpleRoad);
+        purple = (TextView) findViewById(R.id.goToPurpleRoad);
         String purpleMap = "https://www.google.com/maps/dir/32.8211245,34.9968553/Nesher/@32.8161517,34.9895719,14.5z/data=!4m9!4m8!1m0!1m5!1m1!1s0x151dba81e6aaab23:0xf5a48fe039683e6!2m2!1d35.0386443!2d32.7806134!3e1";
 
 
-        Purple.setOnClickListener(new View.OnClickListener() {
+        purple.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW);

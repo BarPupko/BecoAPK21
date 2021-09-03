@@ -12,17 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.becoapk21.Admin.Help;
-import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.StorageReference;
 /*
                        Parking.java ---> INFORMATION
             ------------------------------------------------------------
@@ -54,18 +50,13 @@ public class Parking extends AppCompatActivity {
         parkTheBike =(ImageView) findViewById(R.id.getTheBike);
         fullName = (TextView)findViewById(R.id.fullName1);
         parkTicket = (TextView)findViewById(R.id.parkTicket);
-        //timer//
 
         //Get data from calling intent
         Intent intent = getIntent();
         user_phone = intent.getStringExtra("user_phone");
         user_name = intent.getStringExtra("user_name");
 
-        fullName.setText(user_name);
-//        Toast.makeText(Parking.this, "you name is : " + user_name, Toast.LENGTH_SHORT).show();
-
-
-
+        fullName.setText(user_name);//enter current user - user_name
 
         chatSu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +65,7 @@ public class Parking extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
 
         parkTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,8 +79,6 @@ public class Parking extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
                             Toast.makeText(Parking.this, "האופניים כבר בחנייה", Toast.LENGTH_SHORT).show();
-
-
                         }
                         else{
                             Intent i = new Intent(getApplication(),ParkTheBike.class);
@@ -96,7 +86,6 @@ public class Parking extends AppCompatActivity {
                             i.putExtra("user_name",user_name);
                             startActivity(i);
                         }
-
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -111,9 +100,8 @@ public class Parking extends AppCompatActivity {
         getTheBike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
-                DatabaseReference parking_ref = users_instance.getReference("parked");
-
+                FirebaseDatabase users_instance = FirebaseDatabase.getInstance(); //get current user
+                DatabaseReference parking_ref = users_instance.getReference("parked"); //get current user into parked table
                 Query checkParked = parking_ref.orderByKey().equalTo(user_phone);
                 checkParked.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

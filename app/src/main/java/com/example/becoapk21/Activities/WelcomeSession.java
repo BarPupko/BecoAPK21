@@ -2,7 +2,6 @@ package com.example.becoapk21.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,12 +18,9 @@ import com.example.becoapk21.Admin.ManagerControl;
 import com.example.becoapk21.ForgotPassword.CodeVerfication;
 import com.example.becoapk21.Navigation.RoadMap;
 import com.example.becoapk21.Parking.FixBike;
-import com.example.becoapk21.Parking.ParkTheBike;
 import com.example.becoapk21.Parking.Parking;
 import com.example.becoapk21.R;
 import com.example.becoapk21.Admin.Help;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,11 +44,11 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
     static Random rnd = new Random();
 
     private ImageView parking;//park Bicycle
-    TextView fullName;
     ImageView map;
     ImageView fix;
     ImageView man;
     ImageView chatSu;
+    TextView fullName;
     TextView didYouKnowText;
     TextView verifyMsg;
     Button verifyEmail;
@@ -62,7 +57,6 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
     String user_phone;
     String user_name;
     FirebaseAuth fAuth;
-    String userId;
     String user_email;
     boolean useremailveri;
     @Override
@@ -92,19 +86,15 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
                 , "לאכול שווארמה טעים אבל לא בהכרח בריא"};
         didYouKnowText.setText(arr[random_number]);
         fAuth =FirebaseAuth.getInstance();
-        userId = fAuth.getCurrentUser().getUid();
-        FirebaseUser user = fAuth.getCurrentUser();
-        useremailveri = user.isEmailVerified();
+        FirebaseUser user = fAuth.getCurrentUser();//get current user from firebase
+        useremailveri = user.isEmailVerified();//check with firebase if user verify name
+        //if user didn't verify is email , this text will display on the screen
         if(!useremailveri){
           verifyMsg.setVisibility(View.VISIBLE);
           verifyEmail.setVisibility(View.VISIBLE);
-            verifyMsg.setText("לא אישרת את כתובת המייל שלך!");
-
-
+          verifyMsg.setText("לא אישרת את כתובת המייל שלך!");
         }
-        else{
-           Toast.makeText(WelcomeSession.this, "2", Toast.LENGTH_SHORT).show();
-        }
+
         verifyEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,8 +129,8 @@ public class WelcomeSession<first_name> extends AppCompatActivity {
         });
         //disable the manager button for users that are not manager
         man.setVisibility(ImageView.GONE);
-        //user who manage the application
 
+        //user who manage the application
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
         //create query in which the phones orders in in specific path.
         Query checkUser = reference.orderByChild("user_phone").equalTo(user_phone);

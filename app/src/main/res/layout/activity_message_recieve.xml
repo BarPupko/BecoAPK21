@@ -65,35 +65,5 @@
         android:text="תשלום"
         android:textSize="9dp" />
 
-    <!--    <Button-->
-<!--        android:id="@+id/button4"-->
-<!--        android:layout_width="70dp"-->
-<!--        android:layout_height="36dp"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginStart="179dp"-->
-<!--        android:layout_marginTop="34dp"-->
-<!--        android:layout_marginEnd="162dp"-->
-<!--        android:layout_marginBottom="659dp"-->
-<!--        android:backgroundTint="#BA8C17"-->
-<!--        android:text="כללי" />-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button5"-->
-<!--        android:layout_width="80dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentEnd="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_marginStart="80dp"-->
-<!--        android:layout_marginTop="33dp"-->
-<!--        android:layout_marginEnd="251dp"-->
-<!--        android:layout_marginBottom="660dp"-->
-<!--        android:backgroundTint="#1779BA"-->
-<!--        android:text="תשלום" />-->
-
 
 </RelativeLayout>

@@ -71,7 +71,6 @@ public class MessageReceive extends AppCompatActivity {
                                 count_user_message++; // count messages.
                             }
                         }
-
                     }
 
                     @Override
@@ -110,13 +109,12 @@ public class MessageReceive extends AppCompatActivity {
         //if user click of the delButton it sends to the "deleteOldTextView" function.
         delBtn.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
                 deleteOldTextView(id,user_array[id].getUser_phone());
             }
         });
         mLayout.addView(delBtn);
-
-
         return name;
     }
 
@@ -132,7 +130,5 @@ public class MessageReceive extends AppCompatActivity {
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("users").child(user_phone).child("message");
 
         dbNode.setValue("");//set default value inside the db into --> "" --> (means empty and not NULL)
-
-
     }
 }

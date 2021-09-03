@@ -2,7 +2,6 @@ package com.example.becoapk21.Intro;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,13 +11,9 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-
-import com.example.becoapk21.Activities.MainActivity;
 import com.example.becoapk21.Activities.WelcomeSession;
-import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
 import com.google.android.material.tabs.TabLayout;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +23,11 @@ public class IntroActivity extends AppCompatActivity {
     IntroViewPagerAdapter introViewPagerAdapter;
     TabLayout tabIndicator;
     Button btnNext;
-    int position = 0;//give us the position of the intent we want to go to,default is '0'
     Button btnGetStarted;
     Animation btnAnim;
+    String user_phone;
+    String user_name;
+    int position = 0;//give us the position of the intent we want to go to,default is '0'
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +37,14 @@ public class IntroActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
+        Intent intent = getIntent();
+        user_phone = intent.getStringExtra("user_phone");
+        user_name = intent.getStringExtra("user_name");
         //when this activity is about to be launch , we need to check if its opened before or not
-
         if(restorePrefData()){
             Intent mainActivity = new Intent(getApplicationContext(),WelcomeSession.class);
+            mainActivity.putExtra("user_phone",user_phone);
+            mainActivity.putExtra("user_name",user_name);
             startActivity(mainActivity);
             finish();
         }
@@ -66,10 +65,10 @@ public class IntroActivity extends AppCompatActivity {
 
         //fill list screen
         List<ScreenItem> mList = new ArrayList<>();
-        mList.add(new ScreenItem("ברוכים הבאים", "ברוכים הבאים לחניון האופניים החכם", R.drawable.bicycle));
-        mList.add(new ScreenItem("חנייה", "באפליקציה זו תוכלו לחנות את האופניים בכל עת", R.drawable.putbikeontherail));
-        mList.add(new ScreenItem("מסלולים", "תוכלו למצוא מגוון מסלולים", R.drawable.colormap));
-        mList.add(new ScreenItem("אבטחה", "השירות מאובטח", R.drawable.applogo));
+        mList.add(new ScreenItem("ברוכים הבאים", "חניון האופניים החדיש BECO."+"\n"+"כאן תוכלו למצוא מגוון פעולות ושירותים.", R.drawable.bicycle));
+        mList.add(new ScreenItem("חנייה", "באפליקציה זו תוכלו לחנות את האופניים בכל עת, "+"\n"+"בדרך קלה ובטוחה.", R.drawable.putbikeontherail));
+        mList.add(new ScreenItem("מסלולים", "תוכלו למצוא מגוון מסלולים , לפי דרגת קושי.", R.drawable.colormap));
+        mList.add(new ScreenItem("אבטחה", "השירות מאובטח באבטחה מתקדמת של google.", R.drawable.shield));
         mList.add(new ScreenItem("שמחים שהצטרפתם", " ", R.drawable.applogo));
 
         //setup viewpager
@@ -100,10 +99,9 @@ public class IntroActivity extends AppCompatActivity {
 
 
         });
+
+
         //tablayout
-
-
-
         tabIndicator.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -128,8 +126,11 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //open login activity
                 Intent welcomeSession = new Intent(getApplicationContext(), WelcomeSession.class);
+                welcomeSession.putExtra("user_phone",user_phone);
+                welcomeSession.putExtra("user_name",user_name);
                 startActivity(welcomeSession);
 
                 //use shared preferences
@@ -152,7 +153,7 @@ public class IntroActivity extends AppCompatActivity {
     //function check if intro already opened
     private boolean restorePrefData(){
         SharedPreferences pref = getApplicationContext().getSharedPreferences("myPrefs",MODE_PRIVATE);
-        boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpen",false);
+        Boolean isIntroActivityOpenedBefore = pref.getBoolean("isIntroOpened",false);
         return isIntroActivityOpenedBefore;
     }
 
@@ -163,7 +164,6 @@ public class IntroActivity extends AppCompatActivity {
         btnGetStarted.setVisibility(View.VISIBLE);
         tabIndicator.setVisibility(View.INVISIBLE);
 
-        //TODO: add an animation the getstarted build
         //setup animation
         btnGetStarted.setAnimation(btnAnim);
 

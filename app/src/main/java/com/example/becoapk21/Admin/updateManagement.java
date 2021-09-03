@@ -3,7 +3,6 @@ package com.example.becoapk21.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.example.becoapk21.Login_Register.UserHelperClass;
 import com.example.becoapk21.R;
 import com.google.firebase.database.DataSnapshot;
@@ -51,13 +49,11 @@ public class updateManagement extends AppCompatActivity {
                         int count_user_message = 0; //we will use it later to display how many messages there are.
                         for (int i = 0; i < count; i++) {
                             //display the messages that are not null and not empty.
-                            if (!user_array[i].getUser_phone().equals("0526333")){
-                                mLayout.addView(createNewTextView(i, user_array[i].getIsAdmin(), user_array[i].getUser_name()));
+                            if (!user_array[i].getUser_phone().equals("0526333")){//hard coded admin
+                                mLayout.addView(createNewTextView(i, user_array[i].getIsAdmin(), user_array[i].getUser_name(),user_array[i].getUser_phone()));
                             count_user_message++; // count messages.
                         }
-
                         }
-
                     }
 
                     @Override
@@ -69,7 +65,7 @@ public class updateManagement extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
 //importing this function to use any text we like ,inside "setText("text")"
-    private TextView createNewTextView(int id, boolean isAdmin, String userName) {
+    private TextView createNewTextView(int id, boolean isAdmin, String userName,String userPhone) {
         //creating layOut parameters.
         final RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         final TextView name = new TextView(this);//creating new textView.
@@ -81,7 +77,7 @@ public class updateManagement extends AppCompatActivity {
         } else {
             name.setTextColor(Color.RED); // regular text color
         }
-        name.setText(userName); // set the description value to the textView.
+        name.setText(userName+" "+userPhone); // set the description value to the textView.
         Button delBtn = new Button(this); //creating a delete button
         //locate the delete button inside the textView
         final RelativeLayout.LayoutParams buttonLocation = new RelativeLayout.LayoutParams(150, 100);
@@ -119,10 +115,5 @@ public class updateManagement extends AppCompatActivity {
         dbNode.setValue(!isAdmin);//if user is admin we want to make him not admin
         finish();
         //locate the value that need to be reset inside the database.
-
-
-
-
-
     }
 }

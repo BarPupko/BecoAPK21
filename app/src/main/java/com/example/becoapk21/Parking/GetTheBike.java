@@ -5,21 +5,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.becoapk21.Config.Config;
-import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,12 +27,9 @@ import com.paypal.android.sdk.payments.PayPalPayment;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
-
 import org.json.JSONException;
-
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 
 /*
                       GetTheBike.java ---> INFORMATION
@@ -58,25 +50,15 @@ public class GetTheBike extends AppCompatActivity {
     String user_phone;
     TextView parkingSpot;
     TextView amountToPay;
-    String parkingSpotString;
-    Long time;
-    char parking;
-    int parkingDigit;
-    Date currentDate;
-    double timeParked;
     double amount_to_pay;
     double parkingFee = 55;//10 אג' לדקה
-    double conversion = 1000 * 60 * 60;
-
+    Button payment;
 
     //PAYPAL SDK VARIABLES
     public static final int PAYPAL_REQUEST_CODE = 123;
     private static PayPalConfiguration config = new PayPalConfiguration()
             .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
-
-    Button payment;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         //status bar color
@@ -103,8 +85,8 @@ public class GetTheBike extends AppCompatActivity {
 
         //////////////////////////////////////////////////////////////////////
 
-        FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
-        DatabaseReference admin_ref = users_instance.getReference("admin");
+        FirebaseDatabase users_instance = FirebaseDatabase.getInstance();//get current user
+        DatabaseReference admin_ref = users_instance.getReference("admin"); //
         admin_ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -126,11 +108,7 @@ public class GetTheBike extends AppCompatActivity {
                 if (snapshot.exists()) {
 
                     ParkingHelperClass user = snapshot.child(user_phone).getValue(ParkingHelperClass.class);
-                    // time = (Long) snapshot.child(user_phone).child("parkingTime").child("time").getValue();
-                    // currentDate = new Date();
-                    //timeParked = (double) currentDate.getTime() - time;
-                    // amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers
-                    // amountToPay.setText(Double.toString(amount_to_pay) + " ש''ח ");
+
                     user.setParkingFee(parkingFee);//update parkingFee from database
                     amount_to_pay = user.calculateFee();
                     amountToPay.setText(Double.toString(amount_to_pay) + "שח");
@@ -138,9 +116,6 @@ public class GetTheBike extends AppCompatActivity {
 
 
                     //get the parkingSpot
-                    // parking =  (char)Math.toIntExact((long)snapshot.child(user_phone).child("parkingSpot").getValue());
-                    // parkingDigit =  Math.toIntExact((long)snapshot.child(user_phone).child("parkingDigit").getValue());
-                    //parkingSpotString=parking+""+parkingDigit;
                     parkingSpot.setText(user.getFullParkingSpot());
 
 
@@ -218,12 +193,6 @@ public class GetTheBike extends AppCompatActivity {
 
     //moving to payment intent.
     private void processPayment() {
-
-
-
-
-
-
         PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(amount_to_pay), "ILS",//Paypal showing the currency user need to pay
                 "Pay for parking", PayPalPayment.PAYMENT_INTENT_SALE);
         Intent intent = new Intent(this, PaymentActivity.class);

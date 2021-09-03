@@ -2,6 +2,7 @@ package com.example.becoapk21.Admin;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.os.Bundle;
 import android.os.Looper;
@@ -29,6 +30,7 @@ public class updateFee extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //hide name of intent
         getSupportActionBar().hide();
+        getWindow().setStatusBarColor(ContextCompat.getColor(updateFee.this, R.color.beco));
 
         setContentView(R.layout.activity_update_fee);
         updateFeeButton = (Button) findViewById(R.id.updateFeeButton1);
@@ -69,41 +71,6 @@ public class updateFee extends AppCompatActivity {
                 },
                 500);
 
-
-
-
-//        updateFeeButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Toast.makeText(updateFee.this, "יש להחנות את האופניים לפני בקשasdasdון", Toast.LENGTH_SHORT).show();
-//
-////
-//            }
-//        });
-
-//        updateFeeButton.setOnClickListener(new View.OnClickListener() {
-//
-//            /*
-//            @Override
-//            public void onClick(View v) {
-//                FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
-//                DatabaseReference admin_ref = users_instance.getReference("admin");
-//                admin_ref.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        //משיכת של נתון כמה עולה לדקה לשמור את האופניים
-//                        snapshot.child("parkingFeePerMinute").setValue(Double.parseDouble(String.valueOf(editFee.getText())));
-//                    }
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//                });
-//
-//            }*/
-//        });
-//    }
     }
     public void setParkingFee(){
         currentFee.setText(Double.toString(parkingFee));

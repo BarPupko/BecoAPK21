@@ -65,43 +65,10 @@ public class ParkTheBike extends AppCompatActivity {
                             parking_spot_letters[current_spot] = (char)user.getParkingSpot();//parking_spot_letters array receive new arguments.
                             parking_spot_digits[current_spot++] = user.getParkingDigit();//parking_spot_digits array receive new arguments.
                             parked_user=intent.getStringExtra("user_name");
-                            //!!!!!פונקציה קודמת למציאת והכנסת אופניים פנויים!!!!!
-
-                          // parking_spots[current_spot] = user.getParkingSpot();
-
-                           //  Toast.makeText(ParkTheBike.this,"your parking spot is: "+parking_spots[current_spot], Toast.LENGTH_SHORT).show();
 
                        }
 
 
-                    /*   Arrays.sort(parking_spots, 0, current_spot);
-                       int difference = 0;
-                       if (parking_spots[0].equals("A1")) {
-                           parkingSpot = "A1";
-                       } else {
-                           for (int i = 0; i < current_spot - 1; i++) {
-                               if (parking_spots[i].length() == 2) {
-                                   difference = Character.getNumericValue(parking_spots[i + 1].charAt(1)) - Character.getNumericValue(parking_spots[i].charAt(1));
-                                   if (difference != 1) {
-                                       parkingSpot = Character.toString(parking_spots[i].charAt(0)) + Character.toString((char) (parking_spots[i].charAt(1) + 1));
-                                       break;
-                                   }
-                                   parkingSpot = Character.toString(parking_spots[current_spot - 1].charAt(0)) + Character.toString((char) (parking_spots[current_spot - 1].charAt(1) + 1));
-                               }
-                               else{
-
-                                   difference = Character.getNumericValue(parking_spots[i + 1].charAt(2)) - Character.getNumericValue(parking_spots[i].charAt(2));
-                                   if (difference != 1) {
-                                       parkingSpot = Character.toString(parking_spots[i].charAt(0)) +Character.toString(parking_spots[i].charAt(1))+ Character.toString((char) (parking_spots[i].charAt(2) + 1));
-                                       break;
-                                   }
-                                   parkingSpot = Character.toString(parking_spots[current_spot - 1].charAt(0)) + Character.toString(parking_spots[current_spot - 1].charAt(1))+Character.toString((char) (parking_spots[current_spot - 1].charAt(2) + 1));
-
-                               }
-                           }
-
-                       }
-                       */
                    }
                    @Override
                    public void onCancelled(@NonNull DatabaseError error) {
@@ -112,18 +79,19 @@ public class ParkTheBike extends AppCompatActivity {
 
 
 
-
-        addBike.setOnClickListener(new View.OnClickListener() {
+        //trying add bike to the database
+        addBike.setOnClickListener(new View.OnClickListener() {//complexity O(n^2)
             @Override
             public void onClick(View v) {
-
+                //check if there are available spots
                 if(current_spot<100) {
                 boolean spot_exists = false; // check if spot already exits , if not i will give user this spot.
                 //creating a place for a new bike
-                    outer:
+                    outer://getting out from the loop if we find a spot that does not exist.
                     for(int charC =65;charC<=70;charC++){//first end the first letter
                         for(int Digit=1;Digit<20;Digit++){//find new available digit in this letter
-                            spot_exists=false;
+                            spot_exists=false;//boolean variable check if the place is exist or not
+                            //loop that checks if there empty space , if it does find empty space , spot_exists get true.
                            for(int i=0;i<current_spot;i++){
                                if(parking_spot_digits[i]==Digit && (parking_spot_letters[i] == charC)){
                                   spot_exists=true;
@@ -132,7 +100,7 @@ public class ParkTheBike extends AppCompatActivity {
                             if(!spot_exists){//if spot not exist it will give this user new spot using letter and digits.
                                parkingSpotLetter=(char)charC;
                                 parkingDigit = Digit;
-                                break outer; // get back  to the outer loop.
+                                break outer; // get back to the outer loop.
                             }
 
                         }
@@ -141,16 +109,16 @@ public class ParkTheBike extends AppCompatActivity {
 
                     //information for user , if it find's him a spot in parking.
                     Toast.makeText(ParkTheBike.this, "your parking spot is: " + parkingSpotLetter + "" + parkingDigit, Toast.LENGTH_SHORT).show();
-//                    Toast.makeText(ParkTheBike.this, "you name is : " + parked_user, Toast.LENGTH_SHORT).show();
-                    FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
-                    DatabaseReference parking_ref = users_instance.getReference("parked");
-                    ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpotLetter, parkingTime, parkingDigit,parked_user,"123");
-                    parking_ref.child(user_phone).setValue(helperClass);
+                    FirebaseDatabase users_instance = FirebaseDatabase.getInstance();//get current user
+                    DatabaseReference parking_ref = users_instance.getReference("parked");//enter current user to parked
+                    ParkingHelperClass helperClass = new ParkingHelperClass(parkingSpotLetter, parkingTime, parkingDigit,parked_user);
+                    parking_ref.child(user_phone).setValue(helperClass);//enter inside 'parked' table the values of helperClass variable
                     Toast.makeText(ParkTheBike.this, "האופניים הופקדו בהצלחה!", Toast.LENGTH_SHORT).show();
                 }
                 else{//error for user , if there are not empty space for user.
                     Toast.makeText(ParkTheBike.this, "אין מקום פנוי", Toast.LENGTH_SHORT).show();
                 }
+                //move those variable to welcome session
                 Intent i = new Intent(getApplication(), WelcomeSession.class);
                 i.putExtra("user_phone",user_phone);
                 startActivity(i);

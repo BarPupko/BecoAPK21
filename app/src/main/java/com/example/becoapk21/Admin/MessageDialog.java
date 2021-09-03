@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
@@ -26,7 +25,7 @@ public class MessageDialog extends AppCompatDialogFragment {
         //building an alert , setTitle will be show first then the content of the message.
         //we can enter another button if we like.
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle(" ברוכ/ה הבא לפנאל הניהול ").setMessage("בפאנל הניהול תוכל/י לעקוב אחר ציוד,משתמשים ולהזין דוחות , בהצלחה!").setPositiveButton("המשך", new DialogInterface.OnClickListener() {
+        builder.setTitle(" ברוכ/ה הבא לפנאל הניהול ").setMessage("בפאנל הניהול תוכל/י לעקוב אחר משתמשים , לשנות צוות ניהול , לשנות תעריף חנייה ולצפות בהודעות אישיות, בהצלחה!").setPositiveButton("המשך", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

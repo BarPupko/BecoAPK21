@@ -37,7 +37,7 @@
         android:layout_marginTop="79dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="606dp"
-        android:backgroundTint="#4DFF00"
+        android:backgroundTint="#66CC3A"
         android:text="מנהל"
         android:textSize="10dp" />
 

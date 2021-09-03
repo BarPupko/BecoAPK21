@@ -9,8 +9,8 @@
 
   <androidx.viewpager.widget.ViewPager
       android:id="@+id/screen_viewpager"
-      android:layout_width="397dp"
-      android:layout_height="408dp"
+      android:layout_width="406dp"
+      android:layout_height="496dp"
       android:layout_marginStart="3dp"
       android:layout_marginTop="97dp"
       android:layout_marginEnd="2dp"
@@ -63,5 +63,5 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.739" />
+      app:layout_constraintVertical_bias="0.864" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.example.becoapk21.Activities.WelcomeSession;
-import com.example.becoapk21.Login_Register.Login;
 import com.example.becoapk21.R;
 /*
                         ManagerControl.java ---> INFORMATION

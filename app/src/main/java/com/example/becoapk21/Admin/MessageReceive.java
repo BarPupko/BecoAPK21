@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.becoapk21.ForgotPassword.CodeVerfication;
 import com.example.becoapk21.Login_Register.UserHelperClass;
 import com.example.becoapk21.Parking.ParkingHelperClass;
 import com.example.becoapk21.R;
@@ -37,6 +38,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MessageReceive extends AppCompatActivity {
     private TextView mEditText;
+    public int countTextView;
     private RelativeLayout mLayout;//reaching out to the layout to create new textViews that we recieve from the DB.
     UserHelperClass[] user_array = new UserHelperClass[100];//store 100 messages.
     int count = 0;//count how many user we have in DB.
@@ -46,6 +48,7 @@ public class MessageReceive extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message_recieve);
         mEditText = (TextView) findViewById(R.id.editText);
+        countTextView=0;
         //color the status bar.
         getWindow().setStatusBarColor(ContextCompat.getColor(MessageReceive.this, R.color.beco));
 
@@ -65,9 +68,9 @@ public class MessageReceive extends AppCompatActivity {
                         mLayout = (RelativeLayout) findViewById(R.id.relativeLayout); //mLayout get an id from xml , then we will locate all messages inside this place.
                         int count_user_message = 0; //we will use it later to display how many messages there are.
                         for (int i = 0; i < count; i++) {
-                                //display the messages that are not null and not empty.
-                            if (user_array[i].getMessage()!=null && !user_array[i].getMessage().equals("")) {
-                                mLayout.addView(createNewTextView(user_array[i].messageString(), count_user_message,user_array[i].getMessageType()));
+                            //display the messages that are not null and not empty.
+                            if (!user_array[i].getMessage().equals("")) {
+                                mLayout.addView(createNewTextView(user_array[i].messageString(), i,user_array[i].getMessageType()));
                                 count_user_message++; // count messages.
                             }
                         }
@@ -85,13 +88,13 @@ public class MessageReceive extends AppCompatActivity {
         //creating layOut parameters.
         final RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         final TextView name = new TextView(this);//creating new textView.
-        lparams.setMargins(30, (id + 1) * 100, 400, 0); //location of the text
+        lparams.setMargins(30, (countTextView + 1) * 100, 400, 0); //location of the text
         name.setId(id);//give the layout id from the for loop.
         name.setLayoutParams(lparams); //sending into the textView the parameters necessary to create functional textView.
         if(messageType==0) {//if the messageType is equal to 0 the textView will be colored Yellow , 0 stand for 'כללי'
             name.setTextColor(Color.YELLOW); // regular text color
         }else if(messageType==1){//if the messageType is equal to 1 the textView will be colored Blue  , 1 stands for 'תשלום'
-            name.setTextColor(Color.BLUE); // payment color
+            name.setTextColor(Color.rgb(30,144,255)); // payment color
         }else{//if the messageType is equal to 2 the textView will be colored RED , 2 stands for 'תיקון'.
             name.setTextColor(Color.RED); // fixing color
         }
@@ -100,7 +103,7 @@ public class MessageReceive extends AppCompatActivity {
         //locate the delete button inside the textView
         final RelativeLayout.LayoutParams buttonLocation = new RelativeLayout.LayoutParams(150, 100);
 
-        buttonLocation.setMargins(650, (id + 1) * 100, 0, 10); //creating textView at certain position.
+        buttonLocation.setMargins(650, (countTextView + 1) * 100, 0, 10); //creating textView at certain position.
         delBtn.setLayoutParams(buttonLocation);
         delBtn.setText("X");    //X stands for the symbol inside the button.
         String id1 = Integer.toString(id);
@@ -115,6 +118,7 @@ public class MessageReceive extends AppCompatActivity {
             }
         });
         mLayout.addView(delBtn);
+        countTextView++;
         return name;
     }
 
@@ -128,7 +132,7 @@ public class MessageReceive extends AppCompatActivity {
         deleteButton.setVisibility(View.GONE);
         //locate the value that need to be reset inside the database.
         DatabaseReference dbNode = FirebaseDatabase.getInstance().getReference().child("users").child(user_phone).child("message");
-
+        Toast.makeText(MessageReceive.this,user_phone , Toast.LENGTH_SHORT).show();
         dbNode.setValue("");//set default value inside the db into --> "" --> (means empty and not NULL)
     }
 }

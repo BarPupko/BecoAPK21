@@ -12,12 +12,12 @@ import com.example.becoapk21.R;
 
 public class ForgetPassword extends AppCompatActivity {
 
-    Button nextBtn;
-    EditText getEmail;
     String user_email;
-    EditText getPhone;
-    String user_phone;
     String type;
+    String user_phone;
+    EditText getEmail;
+    EditText getPhone;
+    Button nextBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

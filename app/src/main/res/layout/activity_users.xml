@@ -21,7 +21,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="107dp"
         android:layout_marginBottom="702dp"
-        android:text="תשלום        מיקום חנייה        שם"
+        android:text="תשלום      מיקום חנייה    שם"
         android:textColor="#000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

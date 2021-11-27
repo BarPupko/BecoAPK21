@@ -90,7 +90,7 @@
         android:layout_height="125dp"
         android:layout_marginTop="232dp"
         android:hint="כתוב את ההודעתך פה"
-        android:maxLength="50"
+        android:maxLength="25"
         android:textAlignment="viewEnd"
         android:textAllCaps="true"
         android:id="@+id/userComplaint"

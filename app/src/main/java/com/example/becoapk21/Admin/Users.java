@@ -72,7 +72,7 @@ public class Users extends AppCompatActivity {
                         mLayout = (RelativeLayout) findViewById(R.id.relativeLayout);
 
                         for (int i = 0; i < count; i++) {
-                            mLayout.addView(createNewTextView(user_array[i].toString(), i));
+                            mLayout.addView(createNewTextView(user_array[i].getParked_name(),user_array[i].toString(), i));
                         }
 
                     }
@@ -90,13 +90,14 @@ public class Users extends AppCompatActivity {
     ////////////////////*****PARKING AMOUNT TO PAY********/////////////////
     @SuppressLint("SetTextI18n")
 //importing this function to use any text we like ,inside "setText("text")"
-    private TextView createNewTextView(String description, int id) {
+    private TextView createNewTextView(String parkedName,String description, int id) {
         final RelativeLayout.LayoutParams lparams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         final TextView name = new TextView(this);
         lparams.setMargins(150, (id + 1) * 110, 0, 0); //location of the text
         name.setId(id);
         name.setLayoutParams(lparams);
         name.setTextColor(Color.WHITE); // text color
+        name.setText(parkedName);
         name.setText(description);
         Button delBtn = new Button(this);
         final RelativeLayout.LayoutParams buttonLocation = new RelativeLayout.LayoutParams(150, 100);
@@ -120,6 +121,7 @@ public class Users extends AppCompatActivity {
 
     private void deleteOldTextView(int id, String user_phone) {
         //TextView userDescription= (TextView)findViewById(getResources().getIdentifier(Integer.toString(id),"id",getPackageName()));
+
         TextView userDescription = (TextView) findViewById(id);
         TextView deleteButton = (TextView) findViewById(id + 100);
         userDescription.setVisibility(View.GONE);

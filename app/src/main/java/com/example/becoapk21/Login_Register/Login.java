@@ -58,8 +58,8 @@ public class Login extends AppCompatActivity {
         contact = (ImageView) findViewById(R.id.contact2);
         parkingLocator = (ImageView) findViewById(R.id.parkingLocator1);
         forgotPass = (TextView) findViewById(R.id.forgotPasswordLogin);
-        regPhoneNumber.setText("0526333441");
-        regPassword.setText("Bar123Bar");
+        regPhoneNumber.setText("");
+        regPassword.setText("");
 
 
         //parking locator
@@ -122,6 +122,7 @@ public class Login extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<AuthResult> task) {
                                             if (task.isSuccessful()) {
+                                                //calling intro activity.
                                                 Intent intent = new Intent(getApplicationContext(), IntroActivity.class);
                                                 intent.putExtra("user_phone", user_phone);
                                                 intent.putExtra("user_name", user_name_fromDB);

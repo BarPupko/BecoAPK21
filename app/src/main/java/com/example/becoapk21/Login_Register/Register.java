@@ -48,8 +48,6 @@ public class Register extends AppCompatActivity {
         getWindow().setStatusBarColor(ContextCompat.getColor(Register.this, R.color.beco));
 
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         isPhoneExists = true;

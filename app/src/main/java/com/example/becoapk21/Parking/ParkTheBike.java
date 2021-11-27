@@ -64,10 +64,7 @@ public class ParkTheBike extends AppCompatActivity {
                            ParkingHelperClass user = snapshot.getValue(ParkingHelperClass.class);//get arguments from ParkingHelperClass
                             parking_spot_letters[current_spot] = (char)user.getParkingSpot();//parking_spot_letters array receive new arguments.
                             parking_spot_digits[current_spot++] = user.getParkingDigit();//parking_spot_digits array receive new arguments.
-                            parked_user=intent.getStringExtra("user_name");
-
                        }
-
 
                    }
                    @Override
@@ -75,8 +72,8 @@ public class ParkTheBike extends AppCompatActivity {
 
                    }
                });
-
-
+        //get user name
+        parked_user=intent.getStringExtra("user_name");
 
 
         //trying add bike to the database
@@ -88,12 +85,12 @@ public class ParkTheBike extends AppCompatActivity {
                 boolean spot_exists = false; // check if spot already exits , if not i will give user this spot.
                 //creating a place for a new bike
                     outer://getting out from the loop if we find a spot that does not exist.
-                    for(int charC =65;charC<=70;charC++){//first end the first letter
-                        for(int Digit=1;Digit<20;Digit++){//find new available digit in this letter
-                            spot_exists=false;//boolean variable check if the place is exist or not
+                    for(int charC =65;charC<=70;charC++){//first end the first letter//A-B-C-D-E
+                        for(int Digit=1;Digit<=20;Digit++){//find new available digit in this letter
+                            spot_exists=false;//boolean variable check if the place is exist or not until we Prove otherWise.
                             //loop that checks if there empty space , if it does find empty space , spot_exists get true.
                            for(int i=0;i<current_spot;i++){
-                               if(parking_spot_digits[i]==Digit && (parking_spot_letters[i] == charC)){
+                               if(parking_spot_digits[i]==Digit && (parking_spot_letters[i] == charC)){//arrays contains existing values.
                                   spot_exists=true;
                                }
                            }

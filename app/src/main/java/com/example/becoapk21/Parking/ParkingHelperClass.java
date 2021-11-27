@@ -21,11 +21,10 @@ public class ParkingHelperClass {
     public void setParkingFee(double parkingFee) {
         this.parkingFee = parkingFee;
     }
-
     double timeParked;
     double amount_to_pay;
     double parkingFee = 5;
-    double conversion = 1000 * 60 * 60;//1000 stands for miliseconds * 60 (convert to second) *60 (convert to min)
+    double conversion = 1000 * 60 * 60;//1000 stands for milliseconds * 60 (convert to second) *60 (convert to min)
     StringBuilder sb = new StringBuilder();
 
 
@@ -72,13 +71,13 @@ public class ParkingHelperClass {
 
    //Create method double calculateFee() returns amount user has to pay in according to the time parked
     public double calculateFee(){
-        time=this.getParkingTime().getTime();
+        time=this.getParkingTime().getTime();//time is the millisecond from 1970
         currentDate = new Date();
-        timeParked = (double) currentDate.getTime() - time;
+        timeParked = (double) currentDate.getTime() - time;//הפרש זמנים
         System.out.println(parkingFee);
+        //חישוב מתמטי
         amount_to_pay = Math.round((timeParked / conversion) * parkingFee * 100) / 100.;//round to two numbers parkingFee * 100 / 100.
        return amount_to_pay;
-
     }
 
     //Create method String parkingSpot() returns parking spot of the user (connect parkingChar and parkingDigit)
@@ -90,7 +89,7 @@ public class ParkingHelperClass {
 
     //Create method String toString() returns username +parkingSpot + parkingFee as string format without new lines
     public String toString(){
-        return String.format("%-10s","Namef:"+ this.getParked_name())+String.format(" %-10s","parkingSpot:"+ this.getFullParkingSpot() )+String.format(" %-10s"," fee:"+ this.calculateFee());
+        return String.format("%-10s","Name:"+ this.getParked_name())+String.format(" %-10s","parkingSpot:"+ this.getFullParkingSpot() )+String.format(" %-10s"," fee:"+ this.calculateFee());
     }
 
 

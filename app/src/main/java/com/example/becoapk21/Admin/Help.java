@@ -69,6 +69,9 @@ public class Help extends AppCompatActivity implements AdapterView.OnItemSelecte
         messageType = -1; //default message Type is -1.
         parked = false;   //boolean variables marks that the bicycle not parked.
 
+
+
+
         //Spinner(ComboBox)
         //R.array.use_category --> using category that has spinner value in 'strings.xml'
         //simple_spinner_item showing the spinner without arguments.
@@ -84,6 +87,15 @@ public class Help extends AppCompatActivity implements AdapterView.OnItemSelecte
             public void onClick(View v) {
                 //check if user already parked the bike.
                 user_phone = editTextUserPhoneNumber1.getText().toString();
+                if (user_phone.length() != 10) {//change later to 10 digits
+                    editTextUserPhoneNumber1.setError("יש להזין מספר טלפון בעל 10 ספרות");
+                    return;
+                }
+
+                if (userComplaint.getText().toString().length() < 7 && userComplaint.getText().toString().length() > 30) {//change later to 10 digits
+                    userComplaint.setError("יש להזין לפחות 7 תווים");
+                    return;
+                }
                 FirebaseDatabase users_instance = FirebaseDatabase.getInstance();
                 DatabaseReference parking_ref = users_instance.getReference("parked");
                 Query checkParked = parking_ref.orderByKey().equalTo(user_phone);
@@ -119,6 +131,7 @@ public class Help extends AppCompatActivity implements AdapterView.OnItemSelecte
                                 reference.child(user_phone).child("messageType").setValue(messageType);//writing into the DB what the messageType
                             }
                         }
+
 
                         Toast.makeText(Help.this, "במידה והמשתמש קיים , ההודעה נשלחה.", Toast.LENGTH_SHORT).show();
 

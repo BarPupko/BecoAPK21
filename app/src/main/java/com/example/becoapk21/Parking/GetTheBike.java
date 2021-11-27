@@ -112,7 +112,7 @@ public class GetTheBike extends AppCompatActivity {
                     user.setParkingFee(parkingFee);//update parkingFee from database
                     amount_to_pay = user.calculateFee();
                     amountToPay.setText(Double.toString(amount_to_pay) + "שח");
-                    Toast.makeText(GetTheBike.this, Double.toString(parkingFee), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GetTheBike.this, "תשלום: אגורות לדקה" + Double.toString(parkingFee) , Toast.LENGTH_SHORT).show();
 
 
                     //get the parkingSpot

@@ -99,7 +99,6 @@ public class ParkTheBike extends AppCompatActivity {
                                 parkingDigit = Digit;
                                 break outer; // get back to the outer loop.
                             }
-
                         }
 
                     }

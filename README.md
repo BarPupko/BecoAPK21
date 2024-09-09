@@ -1,4 +1,5 @@
 # BECO - Bike Hub
+![BECO Logo](Logo.png)
 
 ## Languages and Technologies
 ![Java](https://img.shields.io/badge/code-Java-red.svg)

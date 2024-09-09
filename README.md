@@ -1,5 +1,5 @@
 # BECO - Bike Hub
-<img src="Logo.png" alt="BECO Logo" width="200" height="200">
+<img src="Logo.png" alt="BECO Logo" width="400" height="200">
 
 ## Languages and Technologies
 ![Java](https://img.shields.io/badge/code-Java-red.svg)

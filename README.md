@@ -12,6 +12,8 @@
 ## Project Overview
 BECO, short for Bike Eco, is a revolutionary project aimed at enhancing urban mobility and reducing environmental footprint through a smart bike hub system. This system integrates seamlessly with city infrastructure to provide efficient, eco-friendly bike parking solutions, repair services, and user engagement through an interactive application.
 
+## Images
+
 ## Features
 - **Smart Bike Storage**: Automated bike parking to maximize space efficiency and security.
 - **Repair Services**: On-demand bike maintenance and repair options.
